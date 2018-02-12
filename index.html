@@ -4,16 +4,35 @@
   <head>
     <meta charset="utf-8">
     <title>Web Portfolio</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Poiret+One|Quicksand|Raleway">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans%7CQuicksand">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header>
-      <h1>Web Portfolio</h1>
-      <nav>
-        <a href="">Project 1</a>
-        <a href="">Project 2</a>
-        <a href="">Project 3</a>
+      <nav id="navbar-main" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="">Web Portfolio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbar-content" class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Project 1</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Project 2</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Project 3</a>
+            </li>
+          </ul>
+          <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username">
+            <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+          </form>
+        </div>
       </nav>
     </header>
     <section>
@@ -36,7 +55,14 @@
       </header>
       <article>
         <h2>Project 1</h2>
-        <p>Coming Soon<p>
+        <p>
+          Project 1 explores responsive website design. It uses mobile first
+          principles to lay out a simple website with HTML and CSS.
+        </p>
+        <p>
+          The project includes a simple website using basic CSS, and another
+          version using Bootstrap CSS classes.
+        </p>
         <a href="Project1/index.html">Responsive Website Without Bootstrap</a>
         <br/>
         <a href="Project1b/index.html">Responsive Website With Bootstrap</a>
@@ -53,7 +79,11 @@
       </article>
       <article>
         <h2>Additional Coursework</h2>
-        <a href="fonts/fontfun.html">Portfolio Fonts</a>
+        <a href="FontFun/fontfun.html">Portfolio Fonts</a>
+        <br/>
+        <a href="BootstrapExamples/navbar.html">Navbar Bootstrap Example</a>
+        <br/>
+        <a href="BootstrapExamples/carousel.html">Carousel Bootstrap Example</a>
       </article>
     </section>
     <aside>
