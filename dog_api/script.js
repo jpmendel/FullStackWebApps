@@ -47,13 +47,14 @@ function onDogTypeSelected(dogName, number) {
   fetch(`http://dog.ceo/api/breed/${dogName}/images/random`)
     .then((response) => {
       console.log(response);
-      return response.blob();
+      return response.json();
     })
     .then((data) => {
-      let imageElement = document.querySelector(`#dog_select-image${number}`)
-      let imageURL = URL.createObjectURL(data)
-      console.log(imageURL);
-      imageElement.backgroundImage = imageURL;
+      console.log(data);
+      if (data.status === "success") {
+        let imageElement = document.querySelector(`#dog_select-image${number}`);
+        imageElement.src = data.message;
+      }
     })
     .catch((error) => console.log("ERROR: " + error));
 }
