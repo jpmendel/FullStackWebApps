@@ -1,3 +1,15 @@
+const TEAM_NAMES = [
+  "The Wolf Pack",
+  "The Goodest Boys",
+  "The Ruffians",
+  "Bark Nation",
+  "The Fetch Champions"
+];
+
+var dogName1;
+var dogName2;
+var dogName3;
+
 function createDogDropdowns() {
   fetch("http://dog.ceo/api/breeds/list")
     .then((response) => response.json())
@@ -29,34 +41,40 @@ function createDogDropdowns() {
 }
 
 function onDogTypeSelected1(event) {
-  let dogName = event.target.innerHTML.toLowerCase();
-  onDogTypeSelected(dogName, 1);
+  dogName1 = event.target.innerHTML.toLowerCase();
+  onDogTypeSelected(dogName1, 1);
 }
 
 function onDogTypeSelected2(event) {
-  let dogName = event.target.innerHTML.toLowerCase();
-  onDogTypeSelected(dogName, 2);
+  dogName2 = event.target.innerHTML.toLowerCase();
+  onDogTypeSelected(dogName2, 2);
 }
 
 function onDogTypeSelected3(event) {
-  let dogName = event.target.innerHTML.toLowerCase();
-  onDogTypeSelected(dogName, 3);
+  dogName3 = event.target.innerHTML.toLowerCase();
+  onDogTypeSelected(dogName3, 3);
 }
 
 function onDogTypeSelected(dogName, number) {
   fetch(`http://dog.ceo/api/breed/${dogName}/images/random`)
-    .then((response) => {
-      console.log(response);
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       if (data.status === "success") {
         let imageElement = document.querySelector(`#dog_select-image${number}`);
         imageElement.src = data.message;
+        createTeamName();
       }
     })
     .catch((error) => console.log("ERROR: " + error));
+}
+
+function createTeamName() {
+  if (dogName1 && dogName2 && dogName3) {
+    let index = dogName1.charCodeAt(0) + dogName2.charCodeAt(0) + dogName3.charCodeAt(0);
+    let teamName = TEAM_NAMES[index % TEAM_NAMES.length];
+    let nameElement = document.querySelector("#dog_select-team_name");
+    nameElement.innerHTML = teamName;
+  }
 }
 
 function run() {
