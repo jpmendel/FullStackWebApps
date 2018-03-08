@@ -1,0 +1,12 @@
+.dog_image-container {
+  display: flex;
+  width: 500px;
+  height: 500px;
+  text-align: center;
+  margin: auto;
+}
+
+.dog_image-image {
+  width: 500px;
+  height: 500px;
+}

@@ -1,6 +1,6 @@
 import React from "react";
-import DogImage from "./DogImage.js";
-import DogButtons from "./DogButtons.js";
+import DogImage from "./component/DogImage.js";
+import DogButtons from "./component/DogButtons.js";
 
 import "./App.css";
 
@@ -45,7 +45,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div id="main">
+      <div className="main">
         <DogImage image={this.state.image}/>
         <DogButtons woofButtonPress={this.woofButtonPress} doNotWoofButtonPress={this.doNotWoofButtonPress}/>
       </div>
