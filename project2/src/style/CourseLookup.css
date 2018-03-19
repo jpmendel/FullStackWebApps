@@ -1,0 +1,4 @@
+.fade_in {
+  transition: opacity 0.5s;
+  opacity: 1;
+}

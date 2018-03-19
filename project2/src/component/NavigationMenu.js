@@ -10,7 +10,7 @@ class NavigationMenu extends React.Component {
     this.toggleTab = this.toggleTab.bind(this);
 
     this.state = {
-      activeTab: "0",
+      activeTab: "0"
     }
   }
 
