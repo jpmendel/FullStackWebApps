@@ -1,0 +1,21 @@
+.header_background {
+  background-color: darkblue;
+}
+
+.title_label {
+  color: white;
+}
+
+.tab_item {
+  color: white;
+}
+
+.tab_item .active {
+  color: darkblue !important;
+  background-color: white;
+}
+
+.tab_item .active:hover {
+  color: darkblue !important;
+  background-color: white;
+}
