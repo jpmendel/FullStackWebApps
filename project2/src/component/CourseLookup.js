@@ -7,6 +7,7 @@ import LookupByDepartment from "./LookupByDepartment.js";
 import LookupByMajor from "./LookupByMajor.js";
 
 import "../style/CourseLookup.css";
+import "../style/CourseCard.css";
 
 class CourseLookup extends React.Component {
   constructor(props) {

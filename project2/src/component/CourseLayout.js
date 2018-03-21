@@ -23,7 +23,7 @@ class CourseLayout extends React.Component {
       } else {
         courseContent = this.props.courseData
           .map((course, i) => {
-            courseListKey = courseListKey + i.toString();
+            courseListKey += course.CrseNum;
             return (
               <Col className="my-3" xs={12} sm={6} md={4} lg={3} key={i}>
                 <CourseCard course={course}/>

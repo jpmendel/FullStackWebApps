@@ -45,8 +45,8 @@ class LookupByDepartment extends React.Component {
         <Form onSubmit={this.handleDepartmentSubmit} inline>
           <Label for="dept_entry">Enter a department:</Label>
           <Input id="dept_entry" className="ml-3" value={this.state.department}
-            placeholder="Enter DEPT" onChange={this.handleDepartmentChange}/>
-          <Button className="ml-3" color={buttonColor} onClick={this.handleDepartmentSubmit}>Submit</Button>
+            placeholder="Enter department" onChange={this.handleDepartmentChange}/>
+          <Button className="ml-3" color={buttonColor} onClick={this.handleDepartmentSubmit}>Find Courses</Button>
         </Form>
         <CourseLayout courseData={this.state.courseData}/>
       </div>

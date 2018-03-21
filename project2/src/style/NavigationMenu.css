@@ -34,10 +34,8 @@
   margin-right: 0;
 }
 
-@media (min-width: 768px) {
-  #nav_bar {
-    background-color: darkblue;
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
+#nav_bar {
+  background-color: darkblue;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }

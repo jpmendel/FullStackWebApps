@@ -29,10 +29,11 @@ class NavigationMenu extends React.Component {
   }
 
   render() {
+    let padNavbar = !this.state.navbarOpen ? "pb-2 pb-md-0" : "";
     return (
       <div id="header_background">
         <h1 id="title_label" className="text-center text-sm-left p-4">Bucknell Course Lookup</h1>
-        <Navbar id="nav_bar" expand="md" dark>
+        <Navbar id="nav_bar" className={padNavbar} expand="md" dark>
           <NavbarToggler id="toggle_button" onClick={this.toggleNavbar}/>
           <Collapse isOpen={this.state.navbarOpen} navbar>
             <Nav id="nav_menu" className="nav-tabs">

@@ -64,7 +64,7 @@ class CourseCard extends React.Component {
             <CardText>{"Section " + this.props.course.Section}</CardText>
             <CardText>{this.props.course.Instructor}</CardText>
             {meetingTimesWithRooms}
-            <Button className="w-50" color="info">More Info</Button>
+            <Button className="more_info_button w-50">More Info</Button>
           </CardBody>
         </Card>
       </div>

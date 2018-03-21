@@ -32,7 +32,7 @@ class LookupByCourseTitle extends React.Component {
   filterCourseTitleResults(results, keywords) {
     let filteredResults = [];
     for (let result of results) {
-      if (result.Title.includes(keywords)) {
+      if (result.Title.toLowerCase().includes(keywords.toLowerCase())) {
         filteredResults.push(result);
       }
     }
@@ -43,6 +43,7 @@ class LookupByCourseTitle extends React.Component {
     event.preventDefault();
     if (this.state.courseTitle) {
       let courseID = this.findCourseID(this.state.courseTitle);
+      console.log(courseID);
       if (courseID !== null) {
         fetch(`http://eg.bucknell.edu:48484/q?Department=${courseID.department}&CrseNum=${courseID.courseNum}&limit=1000`)
           .then((response) => response.json())
@@ -85,7 +86,7 @@ class LookupByCourseTitle extends React.Component {
           <Input id="title_entry" className="ml-3" value={this.state.courseTitle}
             placeholder="Enter course title" onChange={this.handleCourseTitleChange}
             onKeyPress={this.handleKeyPress}/>
-          <Button className="ml-3" color={buttonColor} onClick={this.handleCourseTitleSubmit}>Submit</Button>
+          <Button className="ml-3" color={buttonColor} onClick={this.handleCourseTitleSubmit}>Find Courses</Button>
         </Form>
         <CourseLayout className="mt-4" courseData={this.state.courseData}/>
       </div>

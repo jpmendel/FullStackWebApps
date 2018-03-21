@@ -45,8 +45,8 @@ class LookupByRequirement extends React.Component {
         <Form onSubmit={this.handleCourseReqSubmit} inline>
           <Label for="ccc_entry">Enter a CCC requirement:</Label>
           <Input id="ccc_entry" className="ml-3" value={this.state.courseReq}
-            placeholder="Enter CCC" onChange={this.handleCourseReqChange}/>
-          <Button className="ml-3" color={buttonColor} onClick={this.handleCourseReqSubmit}>Submit</Button>
+            placeholder="Enter CCC req" onChange={this.handleCourseReqChange}/>
+          <Button className="ml-3" color={buttonColor} onClick={this.handleCourseReqSubmit}>Find Courses</Button>
         </Form>
         <CourseLayout courseData={this.state.courseData}/>
       </div>

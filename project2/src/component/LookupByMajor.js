@@ -97,7 +97,7 @@ class LookupByMajor extends React.Component {
             <option>Junior</option>
             <option>Senior</option>
           </Input>
-          <Button className="ml-3" color={buttonColor} onClick={this.handleMajorSubmit}>Submit</Button>
+          <Button className="ml-3" color={buttonColor} onClick={this.handleMajorSubmit}>Find Courses</Button>
         </Form>
         <CourseLayout courseData={this.state.courseData}/>
       </div>
