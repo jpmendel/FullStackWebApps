@@ -1,13 +1,9 @@
-.header_background {
-  background-color: darkblue;
-}
-
-.title_label {
-  color: white;
-}
-
 .tab_item {
   color: white;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 
 .tab_item .active {
@@ -18,4 +14,30 @@
 .tab_item .active:hover {
   color: darkblue !important;
   background-color: white;
+}
+
+#header_background {
+  background-color: darkblue;
+}
+
+#title_label {
+  color: white;
+}
+
+#nav_menu {
+  width: 100%;
+}
+
+#toggle_button {
+  width: 100%;
+  float: none;
+  margin-right: 0;
+}
+
+@media (min-width: 768px) {
+  #nav_bar {
+    background-color: darkblue;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
 }
