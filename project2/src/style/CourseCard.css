@@ -1,13 +1,13 @@
-.course_card {
+.course_card-main {
   transform: translateY(1.0) !important;
   transition: transform 500ms !important;
 }
 
-.course_card:hover {
+.course_card-main:hover {
   transform: scale(1.05) !important;
 }
 
-.more_info_button {
+.course_card-more_info_button {
   background-color: darkorange !important;
   border-color: darkorange !important;
 }

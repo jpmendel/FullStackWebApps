@@ -1,4 +1,4 @@
-.tab_item {
+.nav_menu-tab_item {
   color: white;
   margin-left: 0px !important;
   margin-right: 0px !important;
@@ -6,36 +6,35 @@
   padding-right: 0px !important;
 }
 
-.tab_item .active {
+.nav_menu-tab_item .active {
   color: darkblue !important;
   background-color: white;
 }
 
-.tab_item .active:hover {
+.nav_menu-tab_item .active:hover {
   color: darkblue !important;
   background-color: white;
 }
 
-#header_background {
+.nav_menu-header {
   background-color: darkblue;
 }
 
-#title_label {
+.nav_menu-title_label {
   color: white;
 }
 
-#nav_menu {
+.nav_menu-tab_menu {
   width: 100%;
 }
 
-#toggle_button {
+.nav_menu-toggle_button {
   width: 100%;
   float: none;
   margin-right: 0;
+  margin-left: 0;
 }
 
-#nav_bar {
+.nav_menu-nav_bar {
   background-color: darkblue;
-  padding-top: 0px;
-  padding-bottom: 0px;
 }

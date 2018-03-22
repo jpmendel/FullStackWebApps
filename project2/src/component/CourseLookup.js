@@ -6,9 +6,6 @@ import LookupByRequirement from "./LookupByRequirement.js";
 import LookupByDepartment from "./LookupByDepartment.js";
 import LookupByMajor from "./LookupByMajor.js";
 
-import "../style/CourseLookup.css";
-import "../style/CourseCard.css";
-
 class CourseLookup extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +34,7 @@ class CourseLookup extends React.Component {
       <div>
         <NavigationMenu changeLookupType={this.changeLookupType}/>
         <ReactCSSTransitionGroup
-          transitionName="fade"
+          transitionName="course_lookup_fade"
           transitionEnter={true}
           transitionEnterTimeout={500}
           transitionLeave={false}

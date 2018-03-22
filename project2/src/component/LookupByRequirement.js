@@ -1,8 +1,9 @@
 import React from "react";
 import {Form, Label, Input, Button} from "reactstrap";
-import CourseLayout from "./CourseLayout.js";
+import BaseLookupMethod from "./BaseLookupMethod.js";
+import CourseList from "./CourseList.js";
 
-class LookupByRequirement extends React.Component {
+class LookupByRequirement extends BaseLookupMethod {
   constructor(props) {
     super(props);
     this.handleCourseReqChange = this.handleCourseReqChange.bind(this);
@@ -20,17 +21,14 @@ class LookupByRequirement extends React.Component {
   handleCourseReqSubmit(event) {
     event.preventDefault();
     if (this.state.courseReq) {
-      fetch(`http://eg.bucknell.edu:48484/q?CCCReq=${this.state.courseReq}&limit=1000`)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data) {
-            if (data.message.length > 0) {
-              this.setState({ courseData: data.message });
-            } else {
-              this.setState({ courseData: "none" });
-            }
-          }
-        });
+      let query = `CCCReq=${this.state.courseReq}&limit=1000`;
+      this.getCoursesByQuery(query, (data) => {
+        if (data.length > 0) {
+          this.setState({ courseData: data });
+        } else {
+          this.setState({ courseData: "none" });
+        }
+      });
     } else {
       if (this.state.courseData === null) {
         this.setState({ courseData: "invalid" });
@@ -48,7 +46,7 @@ class LookupByRequirement extends React.Component {
             placeholder="Enter CCC req" onChange={this.handleCourseReqChange}/>
           <Button className="ml-3" color={buttonColor} onClick={this.handleCourseReqSubmit}>Find Courses</Button>
         </Form>
-        <CourseLayout courseData={this.state.courseData}/>
+        <CourseList courseData={this.state.courseData}/>
       </div>
     );
   }

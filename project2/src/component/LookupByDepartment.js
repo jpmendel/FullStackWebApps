@@ -1,8 +1,9 @@
 import React from "react";
 import {Form, Label, Input, Button} from "reactstrap";
-import CourseLayout from "./CourseLayout.js";
+import BaseLookupMethod from "./BaseLookupMethod.js";
+import CourseList from "./CourseList.js";
 
-class LookupByDepartment extends React.Component {
+class LookupByDepartment extends BaseLookupMethod {
   constructor(props) {
     super(props);
     this.handleDepartmentChange = this.handleDepartmentChange.bind(this);
@@ -20,17 +21,14 @@ class LookupByDepartment extends React.Component {
   handleDepartmentSubmit(event) {
     event.preventDefault();
     if (this.state.department) {
-      fetch(`http://eg.bucknell.edu:48484/q?Department=${this.state.department}&limit=1000`)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data) {
-            if (data.message.length > 0) {
-              this.setState({ courseData: data.message });
-            } else {
-              this.setState({ courseData: "none" });
-            }
-          }
-        });
+      let query = `Department=${this.state.department}&limit=1000`;
+      this.getCoursesByQuery(query, (data) => {
+        if (data.length > 0) {
+          this.setState({ courseData: data });
+        } else {
+          this.setState({ courseData: "none" });
+        }
+      });
     } else {
       if (this.state.courseData === null) {
         this.setState({ courseData: "invalid" });
@@ -48,7 +46,7 @@ class LookupByDepartment extends React.Component {
             placeholder="Enter department" onChange={this.handleDepartmentChange}/>
           <Button className="ml-3" color={buttonColor} onClick={this.handleDepartmentSubmit}>Find Courses</Button>
         </Form>
-        <CourseLayout courseData={this.state.courseData}/>
+        <CourseList courseData={this.state.courseData}/>
       </div>
     );
   }

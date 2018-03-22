@@ -45,9 +45,9 @@ class CourseCard extends React.Component {
       if (rooms.length === 0) {
         room = "";
       } else if (rooms.length <= i) {
-        room = " in " + rooms[rooms.length - 1]
+        room = " - " + rooms[rooms.length - 1]
       } else {
-        room = " in " + rooms[i];
+        room = " - " + rooms[i];
       }
       meetingTimesWithRooms.push(<div key={i}>{meetingTime + room}</div>);
     }
@@ -56,7 +56,7 @@ class CourseCard extends React.Component {
     }
     meetingTimesWithRooms.push(<br key={-1}/>);
     return (
-      <div className="course_card">
+      <div className="course_card-main">
         <Card>
           <CardBody className="text-center">
             <CardTitle>{this.props.course.Department + " " + this.props.course.CrseNum}</CardTitle>
@@ -64,7 +64,7 @@ class CourseCard extends React.Component {
             <CardText>{"Section " + this.props.course.Section}</CardText>
             <CardText>{this.props.course.Instructor}</CardText>
             {meetingTimesWithRooms}
-            <Button className="more_info_button w-50">More Info</Button>
+            <Button className="course_card-more_info_button w-50">More Info</Button>
           </CardBody>
         </Card>
       </div>

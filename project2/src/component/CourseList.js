@@ -3,9 +3,7 @@ import {Row, Col} from "reactstrap";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import CourseCard from "./CourseCard.js";
 
-import "../style/CourseLayout.css";
-
-class CourseLayout extends React.Component {
+class CourseList extends React.Component {
   render() {
     let courseListKey = "";
     let courseContent = null;
@@ -35,7 +33,7 @@ class CourseLayout extends React.Component {
     return (
       <div className="pt-4">
         <ReactCSSTransitionGroup
-          transitionName="fade"
+          transitionName="course_list_fade"
           transitionEnter={true}
           transitionEnterTimeout={500}
           transitionLeave={false}
@@ -49,4 +47,4 @@ class CourseLayout extends React.Component {
   }
 }
 
-export default CourseLayout;
+export default CourseList;

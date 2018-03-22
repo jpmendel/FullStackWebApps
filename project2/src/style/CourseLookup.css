@@ -1,9 +1,9 @@
-.fade-enter {
+.course_lookup_fade-enter {
   opacity: 0.01;
   transform: translateY(25px);
 }
 
-.fade-enter.fade-enter-active {
+.course_lookup_fade-enter.course_lookup_fade-enter-active {
   opacity: 1.0;
   transform: translateY(0px);
   transition: opacity 500ms, transform 500ms;

@@ -1,8 +1,11 @@
 import React from "react";
 import {Form, Label, Input, Button} from "reactstrap";
-import CourseLayout from "./CourseLayout.js";
+import BaseLookupMethod from "./BaseLookupMethod.js";
+import CourseList from "./CourseList.js";
 
-class LookupByMajor extends React.Component {
+import Constants from "../data/Constants.js";
+
+class LookupByMajor extends BaseLookupMethod {
   constructor(props) {
     super(props);
     this.handleMajorChange = this.handleMajorChange.bind(this);
@@ -27,21 +30,7 @@ class LookupByMajor extends React.Component {
   handleMajorSubmit(event) {
     event.preventDefault();
     if (this.state.major && this.state.classYear) {
-      fetch(`http://eg.bucknell.edu:48484/q?Department=CSCI&limit=1000`)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data && data.message.length > 0) {
-            this.setState({ courses: this.state.courses.concat(data.message) });
-          }
-          fetch(`http://eg.bucknell.edu:48484/q?Department=ECEG&limit=1000`)
-            .then((response) => response.json())
-            .then((data) => {
-              if (data && data.message.length > 0) {
-                this.setState({ courses: this.state.courses.concat(data.message) });
-              }
-              this.findRequiredCourses();
-            });
-        });
+      this.findRequiredCourses();
     } else {
       if (this.state.courseData === null) {
         this.setState({ courseData: "invalid" });
@@ -50,30 +39,41 @@ class LookupByMajor extends React.Component {
   }
 
   findRequiredCourses() {
-    let requiredCourses = [];
-    for (let course of this.state.courses) {
-      if (this.state.major === "Computer Science and Engineering") {
-        if (this.state.classYear === "Any" || this.state.classYear === "First Year") {
-          if (course.Course.includes("CSCI 203")) {
-            requiredCourses.push(course);
-          }
+    let courseQueryList = [];
+    if (this.state.major === "Computer Science and Engineering") {
+      if (this.state.classYear === "Any" || this.state.classYear === "First Year") {
+        for (let course of Constants.COMPUTER_SCIENCE_MAJOR.FIRST_YEAR_COURSES) {
+          courseQueryList.push(this.getCourseByID(course));
         }
-        if (this.state.classYear === "Any" || this.state.classYear === "Sophomore") {
-          if (course.Course.includes("CSCI 204")) {
-            requiredCourses.push(course);
-          } else if (course.Course.includes("CSCI 205")) {
-            requiredCourses.push(course);
-          } else if (course.Course.includes("CSCI 206")) {
-            requiredCourses.push(course);
-          }
-        }
-      } else if (this.state.major === "Computer Engineering") {
-
-      } else if (this.state.major === "Electrical Engineering") {
-
       }
+      if (this.state.classYear === "Any" || this.state.classYear === "Sophomore") {
+        for (let course of Constants.COMPUTER_SCIENCE_MAJOR.SOPHOMORE_COURSES) {
+          courseQueryList.push(this.getCourseByID(course));
+        }
+      }
+      if (this.state.classYear === "Any" || this.state.classYear === "Junior") {
+        for (let course of Constants.COMPUTER_SCIENCE_MAJOR.JUNIOR_COURSES) {
+          courseQueryList.push(this.getCourseByID(course));
+        }
+      }
+      if (this.state.classYear === "Any" || this.state.classYear === "Senior") {
+        for (let course of Constants.COMPUTER_SCIENCE_MAJOR.SENIOR_COURSES) {
+          courseQueryList.push(this.getCourseByID(course));
+        }
+      }
+    } else if (this.state.major === "Computer Engineering") {
+
+    } else if (this.state.major === "Electrical Engineering") {
+
     }
-    this.setState({ courseData: requiredCourses });
+    Promise.all(courseQueryList)
+      .then((results) => {
+        let requiredCourses = [];
+        for (let result of results) {
+          requiredCourses.push(...result.message);
+        }
+        this.setState({ courseData: requiredCourses });
+      });
   }
 
   render() {
@@ -99,7 +99,7 @@ class LookupByMajor extends React.Component {
           </Input>
           <Button className="ml-3" color={buttonColor} onClick={this.handleMajorSubmit}>Find Courses</Button>
         </Form>
-        <CourseLayout courseData={this.state.courseData}/>
+        <CourseList courseData={this.state.courseData}/>
       </div>
     );
   }
