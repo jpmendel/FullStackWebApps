@@ -1,4 +1,6 @@
 import React from "react";
+import {Button} from "reactstrap";
+import Scroll from "react-scroll";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import NavigationMenu from "./NavigationMenu.js";
 import LookupByCourseTitle from "./LookupByCourseTitle.js";
@@ -10,13 +12,32 @@ class CourseLookup extends React.Component {
   constructor(props) {
     super(props);
     this.changeLookupType = this.changeLookupType.bind(this);
+    this.scrollToTop = this.scrollToTop.bind(this);
+    this.onWindowScrolled = this.onWindowScrolled.bind(this);
     this.state = {
-      lookupType: "0"
+      lookupType: "0",
+      shouldShowScrollTopButton: false
     };
+  }
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.onWindowScrolled)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onWindowScrolled)
   }
 
   changeLookupType(type) {
     this.setState({ lookupType: type });
+  }
+
+  onWindowScrolled(event) {
+    this.setState({ shouldShowScrollTopButton: (window.scrollY > 0) });
+  }
+
+  scrollToTop() {
+    Scroll.animateScroll.scrollToTop();
   }
 
   render() {
@@ -30,6 +51,12 @@ class CourseLookup extends React.Component {
     } else if (this.state.lookupType === "3") {
       lookupMethod = <LookupByMajor key={3}/>;
     }
+    let scrollContainerClass = "";
+    if (this.state.shouldShowScrollTopButton) {
+      scrollContainerClass = "course_lookup-scroll_top_container course_lookup-scroll_top_container_fade_in";
+    } else {
+      scrollContainerClass = "course_lookup-scroll_top_container";
+    }
     return (
       <div>
         <NavigationMenu changeLookupType={this.changeLookupType}/>
@@ -41,6 +68,13 @@ class CourseLookup extends React.Component {
           transitionLeaveTimeout={500}>
           {lookupMethod}
         </ReactCSSTransitionGroup>
+        <div className={scrollContainerClass}>
+          <Button
+            className="course_lookup-scroll_top_button"
+            onClick={this.scrollToTop}>
+            Top
+          </Button>
+        </div>
       </div>
     );
   }

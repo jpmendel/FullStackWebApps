@@ -1,3 +1,24 @@
+.course_lookup-scroll_top_container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  opacity: 0.0;
+  transform: translateY(1rem);
+  transition: opacity 500ms, transform 500ms;
+}
+
+.course_lookup-scroll_top_container.course_lookup-scroll_top_container_fade_in {
+  opacity: 1.0;
+  transform: translateY(0rem);
+}
+
+.course_lookup-scroll_top_button {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 2rem;
+  text-align: center;
+}
+
 .course_lookup_fade-enter {
   opacity: 0.01;
   transform: translateY(25px);
