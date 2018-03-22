@@ -35,12 +35,11 @@ class CourseCard extends React.Component {
     return meetingTimes;
   }
 
-  render() {
+  findMeetingTimesWithRooms() {
     let meetingTimes = this.parseMeetingTimes();
     let rooms = this.parseRooms();
     let meetingTimesWithRooms = [];
     for (let i = 0; i < meetingTimes.length; i++) {
-      let meetingTime = meetingTimes[i];
       let room = "";
       if (rooms.length === 0) {
         room = "";
@@ -49,12 +48,17 @@ class CourseCard extends React.Component {
       } else {
         room = " - " + rooms[i];
       }
-      meetingTimesWithRooms.push(<div key={i}>{meetingTime + room}</div>);
+      meetingTimesWithRooms.push(<div key={i}>{meetingTimes[i] + room}</div>);
     }
     if (meetingTimesWithRooms.length === 0) {
       meetingTimesWithRooms.push(<div key={0}>TBA</div>);
     }
     meetingTimesWithRooms.push(<br key={-1}/>);
+    return meetingTimesWithRooms;
+  }
+
+  render() {
+    let meetingTimesWithRooms = this.findMeetingTimesWithRooms();
     return (
       <div className="course_card-main">
         <Card>

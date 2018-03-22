@@ -21,14 +21,15 @@ class LookupByRequirement extends BaseLookupMethod {
   handleCourseReqSubmit(event) {
     event.preventDefault();
     if (this.state.courseReq) {
-      let query = `CCCReq=${this.state.courseReq}&limit=1000`;
-      this.getCoursesByQuery(query, (data) => {
-        if (data.length > 0) {
-          this.setState({ courseData: data });
-        } else {
-          this.setState({ courseData: "none" });
-        }
-      });
+      let query = `CCCReq=${this.state.courseReq.toUpperCase()}&limit=1000`;
+      this.getCoursesByQuery(query)
+        .then((data) => {
+          if (data.message.length > 0) {
+            this.setState({ courseData: data.message });
+          } else {
+            this.setState({ courseData: "none" });
+          }
+        });
     } else {
       if (this.state.courseData === null) {
         this.setState({ courseData: "invalid" });

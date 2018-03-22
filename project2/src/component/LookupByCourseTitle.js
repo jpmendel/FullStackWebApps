@@ -66,14 +66,15 @@ class LookupByCourseTitle extends BaseLookupMethod {
           });
       } else {
         let query = `text=${this.state.courseTitle}&limit=1000`
-        this.getCoursesByQuery(query, (data) => {
-          let filteredResults = this.filterCourseTitleResults(data, this.state.courseTitle);
-          if (filteredResults.length > 0) {
-            this.setState({ courseData: filteredResults });
-          } else {
-            this.setState({ courseData: "none" });
-          }
-        });
+        this.getCoursesByQuery(query)
+          .then((data) => {
+            let filteredResults = this.filterCourseTitleResults(data.message, this.state.courseTitle);
+            if (filteredResults.length > 0) {
+              this.setState({ courseData: filteredResults });
+            } else {
+              this.setState({ courseData: "none" });
+            }
+          });
       }
     } else {
       if (this.state.courseData === null) {

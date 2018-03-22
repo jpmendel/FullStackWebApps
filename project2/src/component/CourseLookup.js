@@ -2,8 +2,8 @@ import React from "react";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import NavigationMenu from "./NavigationMenu.js";
 import LookupByCourseTitle from "./LookupByCourseTitle.js";
-import LookupByRequirement from "./LookupByRequirement.js";
 import LookupByDepartment from "./LookupByDepartment.js";
+import LookupByRequirement from "./LookupByRequirement.js";
 import LookupByMajor from "./LookupByMajor.js";
 
 class CourseLookup extends React.Component {
@@ -24,9 +24,9 @@ class CourseLookup extends React.Component {
     if (this.state.lookupType === "0") {
       lookupMethod = <LookupByCourseTitle key={0}/>;
     } else if (this.state.lookupType === "1") {
-      lookupMethod = <LookupByRequirement key={1}/>;
+      lookupMethod = <LookupByDepartment key={1}/>;
     } else if (this.state.lookupType === "2") {
-      lookupMethod = <LookupByDepartment key={2}/>;
+      lookupMethod = <LookupByRequirement key={2}/>;
     } else if (this.state.lookupType === "3") {
       lookupMethod = <LookupByMajor key={3}/>;
     }

@@ -38,33 +38,37 @@ class LookupByMajor extends BaseLookupMethod {
     }
   }
 
+  getCoursesForMajor(major) {
+    let courseQueryList = [];
+    if (this.state.classYear === "Any" || this.state.classYear === "First Year") {
+      for (let course of major.FIRST_YEAR_COURSES) {
+        courseQueryList.push(this.getCourseByID(course));
+      }
+    }
+    if (this.state.classYear === "Any" || this.state.classYear === "Sophomore") {
+      for (let course of major.SOPHOMORE_COURSES) {
+        courseQueryList.push(this.getCourseByID(course));
+      }
+    }
+    if (this.state.classYear === "Any" || this.state.classYear === "Junior") {
+      for (let course of major.JUNIOR_COURSES) {
+        courseQueryList.push(this.getCourseByID(course));
+      }
+    }
+    if (this.state.classYear === "Any" || this.state.classYear === "Senior") {
+      for (let course of major.SENIOR_COURSES) {
+        courseQueryList.push(this.getCourseByID(course));
+      }
+    }
+    return courseQueryList;
+  }
+
   findRequiredCourses() {
     let courseQueryList = [];
-    if (this.state.major === "Computer Science and Engineering") {
-      if (this.state.classYear === "Any" || this.state.classYear === "First Year") {
-        for (let course of Constants.COMPUTER_SCIENCE_MAJOR.FIRST_YEAR_COURSES) {
-          courseQueryList.push(this.getCourseByID(course));
-        }
+    for (let major of Constants.MAJORS) {
+      if (this.state.major === major) {
+        courseQueryList = this.getCoursesForMajor(Constants.COMPUTER_SCIENCE_MAJOR);
       }
-      if (this.state.classYear === "Any" || this.state.classYear === "Sophomore") {
-        for (let course of Constants.COMPUTER_SCIENCE_MAJOR.SOPHOMORE_COURSES) {
-          courseQueryList.push(this.getCourseByID(course));
-        }
-      }
-      if (this.state.classYear === "Any" || this.state.classYear === "Junior") {
-        for (let course of Constants.COMPUTER_SCIENCE_MAJOR.JUNIOR_COURSES) {
-          courseQueryList.push(this.getCourseByID(course));
-        }
-      }
-      if (this.state.classYear === "Any" || this.state.classYear === "Senior") {
-        for (let course of Constants.COMPUTER_SCIENCE_MAJOR.SENIOR_COURSES) {
-          courseQueryList.push(this.getCourseByID(course));
-        }
-      }
-    } else if (this.state.major === "Computer Engineering") {
-
-    } else if (this.state.major === "Electrical Engineering") {
-
     }
     Promise.all(courseQueryList)
       .then((results) => {
@@ -78,24 +82,20 @@ class LookupByMajor extends BaseLookupMethod {
 
   render() {
     let buttonColor = (this.state.major && this.state.classYear) ? "primary" : "secondary";
+    let majors = Constants.MAJORS.map((major) => <option>{major}</option>);
+    let classYears = Constants.CLASS_YEARS.map((classYear) => <option>{classYear}</option>);
     return (
       <div className="p-4">
         <Form onSubmit={this.handleMajorSubmit} inline>
           <Label for="major_entry" className="ml-3">Select your major:</Label>
           <Input id="major_entry" className="ml-3" type="select" value={this.state.major}
             onChange={this.handleMajorChange}>
-            <option>Computer Engineering</option>
-            <option>Computer Science and Engineering</option>
-            <option>Electrical Engineering</option>
+            {majors}
           </Input>
           <Label for="class_year_entry" className="ml-3">and your class year:</Label>
           <Input id="class_year_entry" className="ml-3" type="select" value={this.state.classYear}
             onChange={this.handleClassYearChange}>
-            <option>Any</option>
-            <option>First Year</option>
-            <option>Sophomore</option>
-            <option>Junior</option>
-            <option>Senior</option>
+            {classYears}
           </Input>
           <Button className="ml-3" color={buttonColor} onClick={this.handleMajorSubmit}>Find Courses</Button>
         </Form>

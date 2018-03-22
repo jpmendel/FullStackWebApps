@@ -46,14 +46,14 @@ class NavigationMenu extends React.Component {
                 <NavLink
                   className={classnames({ active: this.state.activeTab === "1" })}
                   onClick={() => this.toggleTab("1")}>
-                  Lookup by CCC Req
+                  Lookup by Department
                 </NavLink>
               </NavItem>
               <NavItem className="nav_menu-tab_item text-center col-xs-12 col-sm-6 col-lg-3">
                 <NavLink
                   className={classnames({ active: this.state.activeTab === "2" })}
                   onClick={() => this.toggleTab("2")}>
-                  Lookup by Department
+                  Lookup by CCC Req
                 </NavLink>
               </NavItem>
               <NavItem className="nav_menu-tab_item text-center col-xs-12 col-sm-6 col-lg-3">
