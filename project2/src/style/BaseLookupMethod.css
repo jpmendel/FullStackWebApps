@@ -1,0 +1,7 @@
+@media (max-width: 576px) {
+  .base_lookup-form {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+  }
+}

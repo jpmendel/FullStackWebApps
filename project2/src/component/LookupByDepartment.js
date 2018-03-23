@@ -10,7 +10,8 @@ class LookupByDepartment extends BaseLookupMethod {
     this.handleDepartmentSubmit = this.handleDepartmentSubmit.bind(this);
     this.state = {
       department: "",
-      courseData: null
+      courseData: null,
+      lastSearch: ""
     };
   }
 
@@ -21,15 +22,19 @@ class LookupByDepartment extends BaseLookupMethod {
   handleDepartmentSubmit(event) {
     event.preventDefault();
     if (this.state.department) {
-      let query = `Department=${this.state.department.toUpperCase()}&limit=1000`;
-      this.getCoursesByQuery(query)
-        .then((data) => {
-          if (data.message.length > 0) {
-            this.setState({ courseData: data.message });
-          } else {
-            this.setState({ courseData: "none" });
-          }
-        });
+      if (this.state.department !== this.state.lastSearch) {
+        this.setState({ lastSearch: this.state.department });
+        this.props.resetAmountLoaded();
+        let query = `Department=${this.state.department.toUpperCase()}&limit=1000`;
+        this.getCoursesByQuery(query)
+          .then((data) => {
+            if (data.message.length > 0) {
+              this.setState({ courseData: data.message });
+            } else {
+              this.setState({ courseData: "none" });
+            }
+          });
+      }
     } else {
       if (this.state.courseData === null) {
         this.setState({ courseData: "invalid" });
@@ -41,13 +46,17 @@ class LookupByDepartment extends BaseLookupMethod {
     let buttonColor = this.state.department ? "primary" : "secondary";
     return (
       <div className="p-4">
-        <Form onSubmit={this.handleDepartmentSubmit} inline>
+        <Form className="base_lookup-form" onSubmit={this.handleDepartmentSubmit} inline>
           <Label for="dept_entry">Enter a department:</Label>
-          <Input id="dept_entry" className="ml-3" value={this.state.department}
+          <Input id="dept_entry" className="ml-sm-3 mt-2 mt-sm-0" value={this.state.department}
             placeholder="Enter department" onChange={this.handleDepartmentChange}/>
-          <Button className="ml-3" color={buttonColor} onClick={this.handleDepartmentSubmit}>Find Courses</Button>
+          <Button
+            className="ml-sm-3 mt-3 mt-sm-0" color={buttonColor}
+            onClick={this.handleDepartmentSubmit}>
+            Find Courses
+          </Button>
         </Form>
-        <CourseList courseData={this.state.courseData}/>
+        <CourseList courseData={this.state.courseData} amountLoaded={this.props.amountLoaded}/>
       </div>
     );
   }

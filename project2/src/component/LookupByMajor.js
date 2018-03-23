@@ -15,7 +15,8 @@ class LookupByMajor extends BaseLookupMethod {
       major: "Computer Engineering",
       classYear: "Any",
       courses: [],
-      courseData: null
+      courseData: null,
+      lastSearch: ""
     };
   }
 
@@ -30,7 +31,11 @@ class LookupByMajor extends BaseLookupMethod {
   handleMajorSubmit(event) {
     event.preventDefault();
     if (this.state.major && this.state.classYear) {
-      this.findRequiredCourses();
+      if ((this.state.major + this.state.classYear) !== this.state.lastSearch) {
+        this.setState({ lastSearch: this.state.major + this.state.classYear });
+        this.props.resetAmountLoaded();
+        this.findRequiredCourses();
+      }
     } else {
       if (this.state.courseData === null) {
         this.setState({ courseData: "invalid" });
@@ -82,24 +87,24 @@ class LookupByMajor extends BaseLookupMethod {
 
   render() {
     let buttonColor = (this.state.major && this.state.classYear) ? "primary" : "secondary";
-    let majors = Constants.MAJORS.map((major) => <option>{major}</option>);
-    let classYears = Constants.CLASS_YEARS.map((classYear) => <option>{classYear}</option>);
+    let majors = Constants.MAJORS.map((major, i) => <option key={i}>{major}</option>);
+    let classYears = Constants.CLASS_YEARS.map((classYear, i) => <option key={i}>{classYear}</option>);
     return (
       <div className="p-4">
-        <Form onSubmit={this.handleMajorSubmit} inline>
-          <Label for="major_entry" className="ml-3">Select your major:</Label>
-          <Input id="major_entry" className="ml-3" type="select" value={this.state.major}
+        <Form className="base_lookup-form" onSubmit={this.handleMajorSubmit} inline>
+          <Label for="major_entry" className="ml-sm-3 mt-2 mt-sm-0">Select your major:</Label>
+          <Input id="major_entry" className="ml-sm-3 mt-3 mt-sm-0" type="select" value={this.state.major}
             onChange={this.handleMajorChange}>
             {majors}
           </Input>
-          <Label for="class_year_entry" className="ml-3">and your class year:</Label>
-          <Input id="class_year_entry" className="ml-3" type="select" value={this.state.classYear}
+          <Label for="class_year_entry" className="ml-sm-3 mt-3 mt-sm-0">and your class year:</Label>
+          <Input id="class_year_entry" className="ml-sm-3 mt-3 mt-sm-0" type="select" value={this.state.classYear}
             onChange={this.handleClassYearChange}>
             {classYears}
           </Input>
-          <Button className="ml-3" color={buttonColor} onClick={this.handleMajorSubmit}>Find Courses</Button>
+          <Button className="ml-sm-3 mt-3 mt-sm-0" color={buttonColor} onClick={this.handleMajorSubmit}>Find Courses</Button>
         </Form>
-        <CourseList courseData={this.state.courseData}/>
+        <CourseList courseData={this.state.courseData} amountLoaded={this.props.amountLoaded}/>
       </div>
     );
   }

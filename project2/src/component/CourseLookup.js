@@ -11,11 +11,13 @@ import LookupByMajor from "./LookupByMajor.js";
 class CourseLookup extends React.Component {
   constructor(props) {
     super(props);
-    this.changeLookupType = this.changeLookupType.bind(this);
-    this.scrollToTop = this.scrollToTop.bind(this);
     this.onWindowScrolled = this.onWindowScrolled.bind(this);
+    this.scrollToTop = this.scrollToTop.bind(this);
+    this.changeLookupType = this.changeLookupType.bind(this);
+    this.resetAmountLoaded = this.resetAmountLoaded.bind(this);
     this.state = {
       lookupType: "0",
+      amountLoaded: 16,
       shouldShowScrollTopButton: false
     };
   }
@@ -28,28 +30,35 @@ class CourseLookup extends React.Component {
     window.removeEventListener("scroll", this.onWindowScrolled)
   }
 
-  changeLookupType(type) {
-    this.setState({ lookupType: type });
-  }
-
   onWindowScrolled(event) {
-    this.setState({ shouldShowScrollTopButton: (window.scrollY > 0) });
+    this.setState({ shouldShowScrollTopButton: (window.scrollY > 50) });
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+      this.setState({ amountLoaded: this.state.amountLoaded + 16 });
+    }
   }
 
   scrollToTop() {
     Scroll.animateScroll.scrollToTop();
   }
 
+  changeLookupType(type) {
+    this.setState({ lookupType: type, amountLoaded: 16 });
+  }
+
+  resetAmountLoaded() {
+    this.setState({ amountLoaded: 16 });
+  }
+
   render() {
     let lookupMethod = null;
     if (this.state.lookupType === "0") {
-      lookupMethod = <LookupByCourseTitle key={0}/>;
+      lookupMethod = <LookupByCourseTitle key={0} amountLoaded={this.state.amountLoaded} resetAmountLoaded={this.resetAmountLoaded}/>;
     } else if (this.state.lookupType === "1") {
-      lookupMethod = <LookupByDepartment key={1}/>;
+      lookupMethod = <LookupByDepartment key={1} amountLoaded={this.state.amountLoaded} resetAmountLoaded={this.resetAmountLoaded}/>;
     } else if (this.state.lookupType === "2") {
-      lookupMethod = <LookupByRequirement key={2}/>;
+      lookupMethod = <LookupByRequirement key={2} amountLoaded={this.state.amountLoaded} resetAmountLoaded={this.resetAmountLoaded}/>;
     } else if (this.state.lookupType === "3") {
-      lookupMethod = <LookupByMajor key={3}/>;
+      lookupMethod = <LookupByMajor key={3} amountLoaded={this.state.amountLoaded} resetAmountLoaded={this.resetAmountLoaded}/>;
     }
     let scrollContainerClass = "";
     if (this.state.shouldShowScrollTopButton) {

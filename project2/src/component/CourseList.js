@@ -4,37 +4,57 @@ import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import CourseCard from "./CourseCard.js";
 
 class CourseList extends React.Component {
-  createCourseContentAndKey() {
-    let courseListKey = "";
-    let courseListContent = null;
+  createCourseContent() {
     if (this.props.courseData !== null) {
       if (this.props.courseData === "invalid") {
-        courseListKey = "invalid";
-        courseListContent = (
-          <div className="text-center mt-5 w-100" key="none">Please enter valid input.</div>
+        return (
+          <Row key={"invalid"}>
+            <div className="text-center mt-5 w-100" key="none">Please enter valid input.</div>
+          </Row>
         );
       } else if (this.props.courseData === "none") {
-        courseListKey = "none";
-        courseListContent = (
-          <div className="text-center mt-5 w-100" key="none">No courses found!</div>
+        return (
+          <Row key={"none"}>
+            <div className="text-center mt-5 w-100" key="none">No courses found!</div>
+          </Row>
         );
       } else {
-        courseListContent = this.props.courseData
-          .map((course, i) => {
-            courseListKey += course.Department + course.CrseNum;
-            return (
-              <Col className="my-3" xs={12} sm={6} md={4} lg={3} key={i}>
-                <CourseCard course={course}/>
-              </Col>
+        let courseListContent = [];
+        let courseRow = [];
+        let courseRowKey = "";
+        let numberOfCourses = 0;
+        if (this.props.amountLoaded < this.props.courseData.length) {
+          numberOfCourses = this.props.amountLoaded;
+        } else {
+          numberOfCourses = this.props.courseData.length;
+        }
+        for (let i = 0; i < numberOfCourses; i++) {
+          let courseItem = this.props.courseData[i];
+          courseRow.push(courseItem);
+          courseRowKey += courseItem.Course;
+          if (courseRow.length === 4 || i === numberOfCourses - 1) {
+            courseListContent.push(
+              <Row key={courseRowKey}>
+                {courseRow.map((course, j) => (
+                  <Col className="my-3" xs={12} sm={6} md={4} lg={3}
+                    key={course.Course + " " + j}>
+                    <CourseCard course={course}/>
+                  </Col>
+                ))}
+              </Row>
             );
-          });
+            courseRow = [];
+            courseRowKey = "";
+          }
+        }
+        return courseListContent;
       }
     }
-    return { courseListContent: courseListContent, courseListKey: courseListKey };
+    return null;
   }
 
   render() {
-    let courses = this.createCourseContentAndKey();
+    let courses = this.createCourseContent();
     return (
       <div className="pt-4">
         <ReactCSSTransitionGroup
@@ -43,9 +63,7 @@ class CourseList extends React.Component {
           transitionEnterTimeout={500}
           transitionLeave={false}
           transitionLeaveTimeout={500}>
-          <Row key={courses.courseListKey}>
-            {courses.courseListContent}
-          </Row>
+          {courses}
         </ReactCSSTransitionGroup>
       </div>
     );

@@ -4,7 +4,7 @@
   right: 1.5rem;
   opacity: 0.0;
   transform: translateY(1rem);
-  transition: opacity 500ms, transform 500ms;
+  transition: opacity 250ms, transform 250ms;
 }
 
 .course_lookup-scroll_top_container.course_lookup-scroll_top_container_fade_in {
@@ -20,7 +20,7 @@
 }
 
 .course_lookup_fade-enter {
-  opacity: 0.01;
+  opacity: 0.0;
   transform: translateY(25px);
 }
 

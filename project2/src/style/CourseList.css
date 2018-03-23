@@ -1,5 +1,5 @@
 .course_list_fade-enter {
-  opacity: 0.01;
+  opacity: 0.0;
   transform: translateY(25px);
 }
 

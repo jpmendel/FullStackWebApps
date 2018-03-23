@@ -6,6 +6,13 @@
   padding-right: 0px !important;
 }
 
+@media (max-width: 768px) {
+  .nav_menu-tab_link {
+    border-top-left-radius: 0rem !important;
+    border-top-right-radius: 0rem !important;
+  }
+}
+
 .nav_menu-tab_item .active {
   color: darkblue !important;
   background-color: white;
@@ -26,6 +33,13 @@
 
 .nav_menu-tab_menu {
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  .nav_menu-tab_menu {
+    width: 100%;
+    border-bottom: 0px;
+  }
 }
 
 .nav_menu-toggle_button {

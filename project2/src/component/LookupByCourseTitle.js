@@ -10,9 +10,18 @@ class LookupByCourseTitle extends BaseLookupMethod {
     this.handleCourseTitleSubmit = this.handleCourseTitleSubmit.bind(this);
     this.state = {
       courseTitle: "",
-      courseData: null
+      courseData: null,
+      lastSearch: "",
+      currentQuery: null,
+      loadingCourses: false
     };
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.amountLoaded > this.props.amountLoaded) {
+  //     this.loadNextCoursesOnScroll();
+  //   }
+  // }
 
   handleCourseTitleChange(event) {
     this.setState({ courseTitle: event.target.value });
@@ -46,35 +55,40 @@ class LookupByCourseTitle extends BaseLookupMethod {
   handleCourseTitleSubmit(event) {
     event.preventDefault();
     if (this.state.courseTitle) {
-      let courseIDs = this.searchForCourseIDs(this.state.courseTitle);
-      if (courseIDs !== null) {
-        let courseQueryList = []
-        for (let courseID of courseIDs) {
-          courseQueryList.push(this.getCourseByID(courseID));
+      if (this.state.courseTitle !== this.state.lastSearch) {
+        this.setState({ lastSearch: this.state.courseTitle });
+        this.props.resetAmountLoaded();
+        let courseIDs = this.searchForCourseIDs(this.state.courseTitle);
+        if (courseIDs !== null) {
+          let courseQueryList = []
+          for (let courseID of courseIDs) {
+            courseQueryList.push(this.getCourseByID(courseID));
+          }
+          Promise.all(courseQueryList)
+            .then((results) => {
+              let requiredCourses = [];
+              for (let result of results) {
+                requiredCourses.push(...result.message);
+              }
+              if (requiredCourses.length > 0) {
+                this.setState({ courseData: requiredCourses });
+              } else {
+                 this.setState({ courseData: "none" });
+              }
+            });
+        } else {
+          let query = `text=${this.state.courseTitle}`
+          this.setState({ currentQuery: query });
+          this.getCoursesByQuery(query)
+            .then((data) => {
+              let filteredResults = this.filterCourseTitleResults(data.message, this.state.courseTitle);
+              if (filteredResults.length > 0) {
+                this.setState({ courseData: filteredResults });
+              } else {
+                this.setState({ courseData: "none" });
+              }
+            });
         }
-        Promise.all(courseQueryList)
-          .then((results) => {
-            let requiredCourses = [];
-            for (let result of results) {
-              requiredCourses.push(...result.message);
-            }
-            if (requiredCourses.length > 0) {
-              this.setState({ courseData: requiredCourses });
-            } else {
-               this.setState({ courseData: "none" });
-            }
-          });
-      } else {
-        let query = `text=${this.state.courseTitle}&limit=1000`
-        this.getCoursesByQuery(query)
-          .then((data) => {
-            let filteredResults = this.filterCourseTitleResults(data.message, this.state.courseTitle);
-            if (filteredResults.length > 0) {
-              this.setState({ courseData: filteredResults });
-            } else {
-              this.setState({ courseData: "none" });
-            }
-          });
       }
     } else {
       if (this.state.courseData === null) {
@@ -83,18 +97,37 @@ class LookupByCourseTitle extends BaseLookupMethod {
     }
   }
 
+  loadNextCoursesOnScroll() {
+    if (this.state.currentQuery !== null && !this.state.loadingCourses) {
+      console.log("NEXT: " + this.props.amountLoaded);
+      this.setState({ loadingCourses: true });
+      this.loadNextCourses(this.state.currentQuery, this.props.amountLoaded, 16)
+        .then((data) => {
+          let filteredResults = this.filterCourseTitleResults(data.message, this.state.courseTitle);
+          if (filteredResults.length > 0) {
+            this.setState({ courseData: this.state.courseData.push(...filteredResults) });
+          }
+          this.setState({ loadingCourses: false });
+        });
+    }
+  }
+
   render() {
     let buttonColor = this.state.courseTitle ? "primary" : "secondary";
     return (
       <div className="p-4">
-        <Form onSubmit={this.handleCourseTitleSubmit} inline>
+        <Form className="base_lookup-form" onSubmit={this.handleCourseTitleSubmit} inline>
           <Label for="title_entry">Enter a course title:</Label>
-          <Input id="title_entry" className="ml-3" value={this.state.courseTitle}
+          <Input id="title_entry" className="ml-sm-3 mt-2 mt-sm-0" value={this.state.courseTitle}
             placeholder="Enter course title" onChange={this.handleCourseTitleChange}
             onKeyPress={this.handleKeyPress}/>
-          <Button className="ml-3" color={buttonColor} onClick={this.handleCourseTitleSubmit}>Find Courses</Button>
+          <Button
+            className="ml-sm-3 mt-3 mt-sm-0" color={buttonColor}
+            onClick={this.handleCourseTitleSubmit}>
+            Find Courses
+          </Button>
         </Form>
-        <CourseList className="mt-4" courseData={this.state.courseData}/>
+        <CourseList className="mt-4" courseData={this.state.courseData} amountLoaded={this.props.amountLoaded}/>
       </div>
     );
   }
