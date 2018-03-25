@@ -29,7 +29,7 @@ class CourseList extends React.Component {
           numberOfCourses = this.props.courseData.length;
         }
         for (let i = 0; i < numberOfCourses; i++) {
-          let courseItem = this.props.courseData[i];
+          const courseItem = this.props.courseData[i];
           courseRow.push(courseItem);
           courseRowKey += courseItem.Course;
           if (courseRow.length === 4 || i === numberOfCourses - 1) {
@@ -54,7 +54,7 @@ class CourseList extends React.Component {
   }
 
   render() {
-    let courses = this.createCourseContent();
+    const courses = this.createCourseContent();
     return (
       <div className="pt-4">
         <ReactCSSTransitionGroup

@@ -25,15 +25,7 @@ class LookupByRequirement extends BaseLookupMethod {
       if (this.state.courseReq !== this.state.lastSearch) {
         this.setState({ lastSearch: this.state.courseReq });
         this.props.resetAmountLoaded();
-        let query = `CCCReq=${this.state.courseReq.toUpperCase()}&limit=1000`;
-        this.getCoursesByQuery(query)
-          .then((data) => {
-            if (data.message.length > 0) {
-              this.setState({ courseData: data.message });
-            } else {
-              this.setState({ courseData: "none" });
-            }
-          });
+        this.loadCoursesBySearching(this.state.courseReq);
       }
     } else {
       if (this.state.courseData === null) {
@@ -42,8 +34,20 @@ class LookupByRequirement extends BaseLookupMethod {
     }
   }
 
+  loadCoursesBySearching(requirement) {
+    const query = `CCCReq=${this.state.courseReq.toUpperCase()}`;
+    this.getCoursesByQuery(query)
+      .then((data) => {
+        if (data.message.length > 0) {
+          this.setState({ courseData: data.message });
+        } else {
+          this.setState({ courseData: "none" });
+        }
+      });
+  }
+
   render() {
-    let buttonColor = this.state.courseReq ? "primary" : "secondary";
+    const buttonColor = this.state.courseReq ? "primary" : "secondary";
     return (
       <div className="p-4">
         <Form className="base_lookup-form" onSubmit={this.handleCourseReqSubmit} inline>

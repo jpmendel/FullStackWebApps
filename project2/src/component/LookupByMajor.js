@@ -34,7 +34,7 @@ class LookupByMajor extends BaseLookupMethod {
       if ((this.state.major + this.state.classYear) !== this.state.lastSearch) {
         this.setState({ lastSearch: this.state.major + this.state.classYear });
         this.props.resetAmountLoaded();
-        this.findRequiredCourses();
+        this.loadRequiredCourses();
       }
     } else {
       if (this.state.courseData === null) {
@@ -68,7 +68,7 @@ class LookupByMajor extends BaseLookupMethod {
     return courseQueryList;
   }
 
-  findRequiredCourses() {
+  loadRequiredCourses() {
     let courseQueryList = [];
     for (let major of Constants.MAJORS) {
       if (this.state.major === major) {
@@ -86,9 +86,9 @@ class LookupByMajor extends BaseLookupMethod {
   }
 
   render() {
-    let buttonColor = (this.state.major && this.state.classYear) ? "primary" : "secondary";
-    let majors = Constants.MAJORS.map((major, i) => <option key={i}>{major}</option>);
-    let classYears = Constants.CLASS_YEARS.map((classYear, i) => <option key={i}>{classYear}</option>);
+    const buttonColor = (this.state.major && this.state.classYear) ? "primary" : "secondary";
+    const majors = Constants.MAJORS.map((major, i) => <option key={i}>{major}</option>);
+    const classYears = Constants.CLASS_YEARS.map((classYear, i) => <option key={i}>{classYear}</option>);
     return (
       <div className="p-4">
         <Form className="base_lookup-form" onSubmit={this.handleMajorSubmit} inline>

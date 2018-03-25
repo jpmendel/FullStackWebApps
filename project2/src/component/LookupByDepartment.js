@@ -25,15 +25,7 @@ class LookupByDepartment extends BaseLookupMethod {
       if (this.state.department !== this.state.lastSearch) {
         this.setState({ lastSearch: this.state.department });
         this.props.resetAmountLoaded();
-        let query = `Department=${this.state.department.toUpperCase()}&limit=1000`;
-        this.getCoursesByQuery(query)
-          .then((data) => {
-            if (data.message.length > 0) {
-              this.setState({ courseData: data.message });
-            } else {
-              this.setState({ courseData: "none" });
-            }
-          });
+        this.loadCoursesBySearching(this.state.department);
       }
     } else {
       if (this.state.courseData === null) {
@@ -42,8 +34,20 @@ class LookupByDepartment extends BaseLookupMethod {
     }
   }
 
+  loadCoursesBySearching(department) {
+    const query = `Department=${department.toUpperCase()}`;
+    this.getCoursesByQuery(query)
+      .then((data) => {
+        if (data.message.length > 0) {
+          this.setState({ courseData: data.message });
+        } else {
+          this.setState({ courseData: "none" });
+        }
+      });
+  }
+
   render() {
-    let buttonColor = this.state.department ? "primary" : "secondary";
+    const buttonColor = this.state.department ? "primary" : "secondary";
     return (
       <div className="p-4">
         <Form className="base_lookup-form" onSubmit={this.handleDepartmentSubmit} inline>

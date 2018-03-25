@@ -11,25 +11,17 @@ class LookupByCourseTitle extends BaseLookupMethod {
     this.state = {
       courseTitle: "",
       courseData: null,
-      lastSearch: "",
-      currentQuery: null,
-      loadingCourses: false
+      lastSearch: ""
     };
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.amountLoaded > this.props.amountLoaded) {
-  //     this.loadNextCoursesOnScroll();
-  //   }
-  // }
 
   handleCourseTitleChange(event) {
     this.setState({ courseTitle: event.target.value });
   }
 
   searchForCourseIDs(text) {
-    let regex = new RegExp("[a-zA-Z]{4}\\s?\\d{3}[a-zA-Z]?", "g");
-    let matchedResults = text.match(regex);
+    const regex = new RegExp("[a-zA-Z]{4}\\s?\\d{3}[a-zA-Z]?", "g");
+    const matchedResults = text.match(regex);
     if (matchedResults && matchedResults.length > 0 && matchedResults[0]) {
       let courseIDs = []
       for (let matchedString of matchedResults) {
@@ -58,36 +50,11 @@ class LookupByCourseTitle extends BaseLookupMethod {
       if (this.state.courseTitle !== this.state.lastSearch) {
         this.setState({ lastSearch: this.state.courseTitle });
         this.props.resetAmountLoaded();
-        let courseIDs = this.searchForCourseIDs(this.state.courseTitle);
+        const courseIDs = this.searchForCourseIDs(this.state.courseTitle);
         if (courseIDs !== null) {
-          let courseQueryList = []
-          for (let courseID of courseIDs) {
-            courseQueryList.push(this.getCourseByID(courseID));
-          }
-          Promise.all(courseQueryList)
-            .then((results) => {
-              let requiredCourses = [];
-              for (let result of results) {
-                requiredCourses.push(...result.message);
-              }
-              if (requiredCourses.length > 0) {
-                this.setState({ courseData: requiredCourses });
-              } else {
-                 this.setState({ courseData: "none" });
-              }
-            });
+          this.loadCoursesByID(courseIDs);
         } else {
-          let query = `text=${this.state.courseTitle}`
-          this.setState({ currentQuery: query });
-          this.getCoursesByQuery(query)
-            .then((data) => {
-              let filteredResults = this.filterCourseTitleResults(data.message, this.state.courseTitle);
-              if (filteredResults.length > 0) {
-                this.setState({ courseData: filteredResults });
-              } else {
-                this.setState({ courseData: "none" });
-              }
-            });
+          this.loadCoursesBySearching(this.state.courseTitle);
         }
       }
     } else {
@@ -97,23 +64,40 @@ class LookupByCourseTitle extends BaseLookupMethod {
     }
   }
 
-  loadNextCoursesOnScroll() {
-    if (this.state.currentQuery !== null && !this.state.loadingCourses) {
-      console.log("NEXT: " + this.props.amountLoaded);
-      this.setState({ loadingCourses: true });
-      this.loadNextCourses(this.state.currentQuery, this.props.amountLoaded, 16)
-        .then((data) => {
-          let filteredResults = this.filterCourseTitleResults(data.message, this.state.courseTitle);
-          if (filteredResults.length > 0) {
-            this.setState({ courseData: this.state.courseData.push(...filteredResults) });
-          }
-          this.setState({ loadingCourses: false });
-        });
+  loadCoursesByID(courseIDs) {
+    let courseQueryList = []
+    for (let courseID of courseIDs) {
+      courseQueryList.push(this.getCourseByID(courseID));
     }
+    Promise.all(courseQueryList)
+      .then((results) => {
+        let requiredCourses = [];
+        for (let result of results) {
+          requiredCourses.push(...result.message);
+        }
+        if (requiredCourses.length > 0) {
+          this.setState({ courseData: requiredCourses });
+        } else {
+           this.setState({ courseData: "none" });
+        }
+      });
+  }
+
+  loadCoursesBySearching(keywords) {
+    const query = `text=${keywords}`
+    this.getCoursesByQuery(query)
+      .then((data) => {
+        const filteredResults = this.filterCourseTitleResults(data.message, keywords);
+        if (filteredResults.length > 0) {
+          this.setState({ courseData: filteredResults });
+        } else {
+          this.setState({ courseData: "none" });
+        }
+      });
   }
 
   render() {
-    let buttonColor = this.state.courseTitle ? "primary" : "secondary";
+    const buttonColor = this.state.courseTitle ? "primary" : "secondary";
     return (
       <div className="p-4">
         <Form className="base_lookup-form" onSubmit={this.handleCourseTitleSubmit} inline>

@@ -7,15 +7,10 @@ class BaseLookupMethod extends React.Component {
       .then((response) => response.json());
   }
 
-  loadNextCourses(query, previous, next) {
-    return fetch(Constants.SERVER_URL + "q?" + query + "&limit=" + next + "&skip=" + previous)
-      .then((response) => response.json());
-  }
-
   getCourseByID(courseID) {
-    let department = courseID.slice(0, 4).toUpperCase();
-    let courseNum = courseID.substring(4).trim().toUpperCase();
-    let query = `Department=${department}&CrseNum=${courseNum}&limit=16`;
+    const department = courseID.slice(0, 4).toUpperCase();
+    const courseNum = courseID.substring(4).trim().toUpperCase();
+    const query = `Department=${department}&CrseNum=${courseNum}&limit=16`;
     return fetch(Constants.SERVER_URL + "q?" + query)
       .then((response) => response.json());
   }

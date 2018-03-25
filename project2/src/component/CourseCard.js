@@ -24,7 +24,7 @@ class CourseCard extends React.Component {
     let counter = 0;
     while (counter < this.props.course["Meeting Time"].length) {
       meetingTime += this.props.course["Meeting Time"].charAt(counter);
-      let lastTwo = meetingTime.slice(-2);
+      const lastTwo = meetingTime.slice(-2);
       if (lastTwo === "am" || lastTwo === "pm") {
         meetingTimes.push(meetingTime);
         meetingTime = "";
@@ -36,9 +36,9 @@ class CourseCard extends React.Component {
   }
 
   findMeetingTimesWithRooms() {
-    let meetingTimes = this.parseMeetingTimes();
-    let rooms = this.parseRooms();
-    let meetingTimesWithRooms = [];
+    const meetingTimes = this.parseMeetingTimes();
+    const rooms = this.parseRooms();
+    const meetingTimesWithRooms = [];
     for (let i = 0; i < meetingTimes.length; i++) {
       let room = "";
       if (rooms.length === 0) {
@@ -58,7 +58,7 @@ class CourseCard extends React.Component {
   }
 
   render() {
-    let meetingTimesWithRooms = this.findMeetingTimesWithRooms();
+    const meetingTimesWithRooms = this.findMeetingTimesWithRooms();
     return (
       <div className="course_card-main">
         <Card>
