@@ -5,3 +5,9 @@
     align-items: center;
   }
 }
+
+@media (min-width: 576px) {
+  .base_lookup-input {
+    width: 300px !important;
+  }
+}

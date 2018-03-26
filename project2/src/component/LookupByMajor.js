@@ -8,9 +8,9 @@ import Constants from "../data/Constants.js";
 class LookupByMajor extends BaseLookupMethod {
   constructor(props) {
     super(props);
-    this.handleMajorChange = this.handleMajorChange.bind(this);
-    this.handleClassYearChange = this.handleClassYearChange.bind(this);
-    this.handleMajorSubmit = this.handleMajorSubmit.bind(this);
+    this.onMajorChange = this.onMajorChange.bind(this);
+    this.onClassYearChange = this.onClassYearChange.bind(this);
+    this.onMajorSubmit = this.onMajorSubmit.bind(this);
     this.state = {
       major: "Computer Engineering",
       classYear: "Any",
@@ -20,15 +20,15 @@ class LookupByMajor extends BaseLookupMethod {
     };
   }
 
-  handleMajorChange(event) {
+  onMajorChange(event) {
     this.setState({ major: event.target.value });
   }
 
-  handleClassYearChange(event) {
+  onClassYearChange(event) {
     this.setState({ classYear: event.target.value });
   }
 
-  handleMajorSubmit(event) {
+  onMajorSubmit(event) {
     event.preventDefault();
     if (this.state.major && this.state.classYear) {
       if ((this.state.major + this.state.classYear) !== this.state.lastSearch) {
@@ -91,18 +91,18 @@ class LookupByMajor extends BaseLookupMethod {
     const classYears = Constants.CLASS_YEARS.map((classYear, i) => <option key={i}>{classYear}</option>);
     return (
       <div className="p-4">
-        <Form className="base_lookup-form" onSubmit={this.handleMajorSubmit} inline>
-          <Label for="major_entry" className="ml-sm-3 mt-2 mt-sm-0">Select your major:</Label>
+        <Form className="base_lookup-form" onSubmit={this.onMajorSubmit} inline>
+          <Label for="major_entry" className="mt-2 mt-sm-0">Select your major:</Label>
           <Input id="major_entry" className="ml-sm-3 mt-3 mt-sm-0" type="select" value={this.state.major}
-            onChange={this.handleMajorChange}>
+            onChange={this.onMajorChange}>
             {majors}
           </Input>
           <Label for="class_year_entry" className="ml-sm-3 mt-3 mt-sm-0">and your class year:</Label>
           <Input id="class_year_entry" className="ml-sm-3 mt-3 mt-sm-0" type="select" value={this.state.classYear}
-            onChange={this.handleClassYearChange}>
+            onChange={this.onClassYearChange}>
             {classYears}
           </Input>
-          <Button className="ml-sm-3 mt-3 mt-sm-0" color={buttonColor} onClick={this.handleMajorSubmit}>Find Courses</Button>
+          <Button className="ml-sm-3 mt-3 mt-sm-0" color={buttonColor} onClick={this.onMajorSubmit}>Find Courses</Button>
         </Form>
         <CourseList courseData={this.state.courseData} amountLoaded={this.props.amountLoaded}/>
       </div>

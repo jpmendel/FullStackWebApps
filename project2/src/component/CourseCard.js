@@ -1,7 +1,30 @@
 import React from "react";
-import {Card, CardBody, CardTitle, CardSubtitle, CardText, Button} from "reactstrap";
+import {Card, CardBody, CardTitle, CardSubtitle, CardText, Button,
+        Input, InputGroup, InputGroupAddon, Tooltip} from "reactstrap";
+import CopyToClipboard from "react-copy-to-clipboard";
+import ContentCopyIcon from "material-ui-icons/ContentCopy";
+import DoneIcon from "material-ui-icons/Done";
 
 class CourseCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onCopyCRN = this.onCopyCRN.bind(this);
+    this.onTooltipOpen = this.onTooltipOpen.bind(this);
+    this.onViewDetail = this.onViewDetail.bind(this);
+    this.state = {
+      copiedCRN: false,
+      tooltipOpen: false
+    };
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (this.state.copiedCRN) {
+      if (newProps.lastCopiedCRN !== "C" + this.props.course.CRN) {
+        this.setState({ copiedCRN: false });
+      }
+    }
+  }
+
   parseRooms() {
     let rooms = [];
     let room = "";
@@ -57,18 +80,52 @@ class CourseCard extends React.Component {
     return meetingTimesWithRooms;
   }
 
+  onCopyCRN() {
+    this.setState({ copiedCRN: true });
+    this.props.onCopyCRN("C" + this.props.course.CRN);
+  }
+
+  onTooltipOpen() {
+    this.setState({ tooltipOpen: !this.state.tooltipOpen });
+  }
+
+  onViewDetail() {
+    this.props.onViewDetail(this.props.course);
+  }
+
   render() {
+    const course = this.props.course;
     const meetingTimesWithRooms = this.findMeetingTimesWithRooms();
+    const copyIcon = this.state.copiedCRN ? <DoneIcon/> : <ContentCopyIcon/>;
+    const tooltipText = this.state.copiedCRN ? "Copied!" : "Copy CRN";
     return (
       <div className="course_card-main">
         <Card>
           <CardBody className="text-center">
-            <CardTitle>{this.props.course.Department + " " + this.props.course.CrseNum}</CardTitle>
-            <CardSubtitle>{this.props.course.Title}</CardSubtitle>
-            <CardText>{"Section " + this.props.course.Section}</CardText>
-            <CardText>{this.props.course.Instructor}</CardText>
+            <CardTitle>{course.Department + " " + course.CrseNum}</CardTitle>
+            <CardSubtitle>{course.Title}</CardSubtitle>
+            <CardText>{"Section " + course.Section}</CardText>
+            <InputGroup className="course_card-input_group" size="sm">
+              <Input className="text-center" value={course.CRN} readOnly/>
+              <InputGroupAddon addonType="append">
+                <CopyToClipboard id={"C" + course.CRN} text={course.CRN} onCopy={this.onCopyCRN}>
+                  <Button color="primary">{copyIcon}</Button>
+                </CopyToClipboard>
+                <Tooltip
+                  placement="top" isOpen={this.state.tooltipOpen}
+                  target={"C" + course.CRN} toggle={this.onTooltipOpen}>
+                  {tooltipText}
+                </Tooltip>
+              </InputGroupAddon>
+            </InputGroup>
+            <br/>
+            <CardText>{course.Instructor}</CardText>
             {meetingTimesWithRooms}
-            <Button className="course_card-more_info_button w-50">More Info</Button>
+            <Button
+              className="course_card-more_info_button w-50"
+              onClick={this.onViewDetail}>
+              View Details
+            </Button>
           </CardBody>
         </Card>
       </div>

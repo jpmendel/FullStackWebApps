@@ -2,8 +2,20 @@ import React from "react";
 import {Row, Col} from "reactstrap";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import CourseCard from "./CourseCard.js";
+import CourseDetailModal from "./CourseDetailModal.js";
 
 class CourseList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onToggleModal = this.onToggleModal.bind(this);
+    this.onCopyCRN = this.onCopyCRN.bind(this);
+    this.state = {
+      isModalOpen: false,
+      selectedCourse: null,
+      lastCopiedCRN: "C00000"
+    }
+  }
+
   createCourseContent() {
     if (this.props.courseData !== null) {
       if (this.props.courseData === "invalid") {
@@ -19,44 +31,46 @@ class CourseList extends React.Component {
           </Row>
         );
       } else {
-        let courseListContent = [];
-        let courseRow = [];
-        let courseRowKey = "";
-        let numberOfCourses = 0;
-        if (this.props.amountLoaded < this.props.courseData.length) {
-          numberOfCourses = this.props.amountLoaded;
-        } else {
-          numberOfCourses = this.props.courseData.length;
+        let courseList = [];
+        let courseListKey = "";
+        for (let i = 0; i < this.props.courseData.length; i++) {
+          const course = this.props.courseData[i];
+          courseListKey += course.Course;
+          courseList.push(
+            <Col className="my-3" xs={12} sm={6} md={4} lg={3} key={course.Course + " " + i}>
+              <CourseCard
+                course={course} onViewDetail={this.onToggleModal}
+                lastCopiedCRN={this.state.lastCopiedCRN} onCopyCRN={this.onCopyCRN}/>
+            </Col>
+          );
         }
-        for (let i = 0; i < numberOfCourses; i++) {
-          const courseItem = this.props.courseData[i];
-          courseRow.push(courseItem);
-          courseRowKey += courseItem.Course;
-          if (courseRow.length === 4 || i === numberOfCourses - 1) {
-            courseListContent.push(
-              <Row key={courseRowKey}>
-                {courseRow.map((course, j) => (
-                  <Col className="my-3" xs={12} sm={6} md={4} lg={3}
-                    key={course.Course + " " + j}>
-                    <CourseCard course={course}/>
-                  </Col>
-                ))}
-              </Row>
-            );
-            courseRow = [];
-            courseRowKey = "";
-          }
-        }
+        const courseListContent = (
+          <Row key={courseListKey}>
+            {courseList}
+          </Row>
+        );
         return courseListContent;
       }
     }
     return null;
   }
 
+  onToggleModal(course) {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen,
+      selectedCourse: course
+    });
+  }
+
+  onCopyCRN(crn) {
+    this.setState({ lastCopiedCRN: crn });
+  }
+
   render() {
     const courses = this.createCourseContent();
     return (
       <div className="pt-4">
+        <CourseDetailModal course={this.state.selectedCourse} isOpen={this.state.isModalOpen} toggle={this.onToggleModal}/>
         <ReactCSSTransitionGroup
           transitionName="course_list_fade"
           transitionEnter={true}

@@ -19,6 +19,10 @@
   text-align: center;
 }
 
+.course_lookup-arrow_up_icon {
+  transform: translateY(0.1rem);
+}
+
 .course_lookup_fade-enter {
   opacity: 0.0;
   transform: translateY(25px);

@@ -6,8 +6,8 @@ import CourseList from "./CourseList.js";
 class LookupByCourseTitle extends BaseLookupMethod {
   constructor(props) {
     super(props);
-    this.handleCourseTitleChange = this.handleCourseTitleChange.bind(this);
-    this.handleCourseTitleSubmit = this.handleCourseTitleSubmit.bind(this);
+    this.onCourseTitleChange = this.onCourseTitleChange.bind(this);
+    this.onCourseTitleSubmit = this.onCourseTitleSubmit.bind(this);
     this.state = {
       courseTitle: "",
       courseData: null,
@@ -15,7 +15,7 @@ class LookupByCourseTitle extends BaseLookupMethod {
     };
   }
 
-  handleCourseTitleChange(event) {
+  onCourseTitleChange(event) {
     this.setState({ courseTitle: event.target.value });
   }
 
@@ -44,7 +44,7 @@ class LookupByCourseTitle extends BaseLookupMethod {
     return filteredResults;
   }
 
-  handleCourseTitleSubmit(event) {
+  onCourseTitleSubmit(event) {
     event.preventDefault();
     if (this.state.courseTitle) {
       if (this.state.courseTitle !== this.state.lastSearch) {
@@ -100,14 +100,13 @@ class LookupByCourseTitle extends BaseLookupMethod {
     const buttonColor = this.state.courseTitle ? "primary" : "secondary";
     return (
       <div className="p-4">
-        <Form className="base_lookup-form" onSubmit={this.handleCourseTitleSubmit} inline>
-          <Label for="title_entry">Enter a course title:</Label>
-          <Input id="title_entry" className="ml-sm-3 mt-2 mt-sm-0" value={this.state.courseTitle}
-            placeholder="Enter course title" onChange={this.handleCourseTitleChange}
-            onKeyPress={this.handleKeyPress}/>
+        <Form className="base_lookup-form" onSubmit={this.onCourseTitleSubmit} inline>
+          <Label for="title_entry" className="text-center">Enter a course title or course ID (ex. CSCI 204):</Label>
+          <Input id="title_entry" className="base_lookup-input ml-sm-3 mt-2 mt-sm-0" value={this.state.courseTitle}
+            placeholder="Enter course title or ID" onChange={this.onCourseTitleChange}/>
           <Button
             className="ml-sm-3 mt-3 mt-sm-0" color={buttonColor}
-            onClick={this.handleCourseTitleSubmit}>
+            onClick={this.onCourseTitleSubmit}>
             Find Courses
           </Button>
         </Form>

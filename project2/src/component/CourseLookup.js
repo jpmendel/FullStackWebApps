@@ -2,6 +2,7 @@ import React from "react";
 import {Button} from "reactstrap";
 import Scroll from "react-scroll";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import ArrowUpwardIcon from "material-ui-icons/ArrowUpward";
 import NavigationMenu from "./NavigationMenu.js";
 import LookupByCourseTitle from "./LookupByCourseTitle.js";
 import LookupByDepartment from "./LookupByDepartment.js";
@@ -81,7 +82,7 @@ class CourseLookup extends React.Component {
           <Button
             className="course_lookup-scroll_top_button"
             onClick={this.scrollToTop}>
-            Top
+            <ArrowUpwardIcon className="course_lookup-arrow_up_icon"/>
           </Button>
         </div>
       </div>

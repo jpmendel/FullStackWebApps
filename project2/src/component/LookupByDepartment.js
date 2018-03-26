@@ -6,8 +6,8 @@ import CourseList from "./CourseList.js";
 class LookupByDepartment extends BaseLookupMethod {
   constructor(props) {
     super(props);
-    this.handleDepartmentChange = this.handleDepartmentChange.bind(this);
-    this.handleDepartmentSubmit = this.handleDepartmentSubmit.bind(this);
+    this.onDepartmentChange = this.onDepartmentChange.bind(this);
+    this.onDepartmentSubmit = this.onDepartmentSubmit.bind(this);
     this.state = {
       department: "",
       courseData: null,
@@ -15,11 +15,11 @@ class LookupByDepartment extends BaseLookupMethod {
     };
   }
 
-  handleDepartmentChange(event) {
+  onDepartmentChange(event) {
     this.setState({ department: event.target.value });
   }
 
-  handleDepartmentSubmit(event) {
+  onDepartmentSubmit(event) {
     event.preventDefault();
     if (this.state.department) {
       if (this.state.department !== this.state.lastSearch) {
@@ -50,13 +50,13 @@ class LookupByDepartment extends BaseLookupMethod {
     const buttonColor = this.state.department ? "primary" : "secondary";
     return (
       <div className="p-4">
-        <Form className="base_lookup-form" onSubmit={this.handleDepartmentSubmit} inline>
-          <Label for="dept_entry">Enter a department:</Label>
-          <Input id="dept_entry" className="ml-sm-3 mt-2 mt-sm-0" value={this.state.department}
-            placeholder="Enter department" onChange={this.handleDepartmentChange}/>
+        <Form className="base_lookup-form" onSubmit={this.onDepartmentSubmit} inline>
+          <Label for="dept_entry" className="text-center">Enter a department:</Label>
+          <Input id="dept_entry" className="base_lookup-input ml-sm-3 mt-2 mt-sm-0" value={this.state.department}
+            placeholder="Enter department" onChange={this.onDepartmentChange}/>
           <Button
             className="ml-sm-3 mt-3 mt-sm-0" color={buttonColor}
-            onClick={this.handleDepartmentSubmit}>
+            onClick={this.onDepartmentSubmit}>
             Find Courses
           </Button>
         </Form>
