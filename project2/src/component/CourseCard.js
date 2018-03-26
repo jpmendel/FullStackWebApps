@@ -109,7 +109,7 @@ class CourseCard extends React.Component {
               <Input className="text-center" value={course.CRN} readOnly/>
               <InputGroupAddon addonType="append">
                 <CopyToClipboard id={"C" + course.CRN} text={course.CRN} onCopy={this.onCopyCRN}>
-                  <Button color="primary">{copyIcon}</Button>
+                  <Button className="pt-2" color="primary">{copyIcon}</Button>
                 </CopyToClipboard>
                 <Tooltip
                   placement="top" isOpen={this.state.tooltipOpen}

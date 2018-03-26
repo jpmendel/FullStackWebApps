@@ -3,6 +3,8 @@ import {Form, Label, Input, Button} from "reactstrap";
 import BaseLookupMethod from "./BaseLookupMethod.js";
 import CourseList from "./CourseList.js";
 
+import Constants from "../data/Constants.js";
+
 class LookupByDepartment extends BaseLookupMethod {
   constructor(props) {
     super(props);
@@ -25,7 +27,7 @@ class LookupByDepartment extends BaseLookupMethod {
       if (this.state.department !== this.state.lastSearch) {
         this.setState({ lastSearch: this.state.department });
         this.props.resetAmountLoaded();
-        this.loadCoursesBySearching(this.state.department);
+        this.loadCoursesBySearching(this.state.department.slice(0, 4));
       }
     } else {
       if (this.state.courseData === null) {
@@ -48,12 +50,15 @@ class LookupByDepartment extends BaseLookupMethod {
 
   render() {
     const buttonColor = this.state.department ? "primary" : "secondary";
+    const departments = Constants.DEPARTMENTS.map((dept, i) => <option key={i}>{dept}</option>);
     return (
       <div className="p-4">
         <Form className="base_lookup-form" onSubmit={this.onDepartmentSubmit} inline>
           <Label for="dept_entry" className="text-center">Enter a department:</Label>
-          <Input id="dept_entry" className="base_lookup-input ml-sm-3 mt-2 mt-sm-0" value={this.state.department}
-            placeholder="Enter department" onChange={this.onDepartmentChange}/>
+          <Input id="dept_entry" className="ml-sm-3 mt-2 mt-sm-0" type="select" value={this.state.department}
+            placeholder="Enter department" onChange={this.onDepartmentChange}>
+            {departments}
+          </Input>
           <Button
             className="ml-sm-3 mt-3 mt-sm-0" color={buttonColor}
             onClick={this.onDepartmentSubmit}>

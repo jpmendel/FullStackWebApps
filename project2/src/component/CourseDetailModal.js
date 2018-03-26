@@ -1,6 +1,8 @@
 import React from "react";
 import {Modal, ModalHeader, ModalBody, ModalFooter, Button} from "reactstrap";
 import CopyToClipboard from "react-copy-to-clipboard";
+import ContentCopyIcon from "material-ui-icons/ContentCopy";
+import DoneIcon from "material-ui-icons/Done";
 
 class CourseDetailModal extends React.Component {
   constructor(props) {
@@ -88,7 +90,7 @@ class CourseDetailModal extends React.Component {
           }
         }
       }
-      const copiedCRN = this.state.copiedCRN ? "Copied!" : "Copy CRN";
+      const copyText = this.state.copiedCRN ? "Copied!" : "Copy CRN";
       return (
         <div>
           <Modal isOpen={this.props.isOpen} toggle={this.onCloseModal}>
@@ -107,7 +109,7 @@ class CourseDetailModal extends React.Component {
             </ModalBody>
             <ModalFooter>
               <CopyToClipboard text={this.props.course.CRN} onCopy={this.onCopyCRN}>
-                <Button color="primary">{copiedCRN}</Button>
+                <Button color="primary">{copyText}</Button>
               </CopyToClipboard>
               <Button color="secondary" onClick={this.onCloseModal}>Close</Button>
             </ModalFooter>
