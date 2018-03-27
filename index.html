@@ -12,19 +12,19 @@
     <header>
       <nav id="navbar-main" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="">Web Portfolio</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div id="navbar-content" class="collapse navbar-collapse">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="project1a">Project 1a</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="project1b">Project 1b</a>
+            <li class="nav-item">
+              <a class="nav-link" href="project1a/index.html">Project 1a</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="project2/build">Project 2</a>
+              <a class="nav-link" href="project1b/index.html">Project 1b</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="project2/build/index.html">Project 2</a>
             </li>
             <li class="nav-item">
               <a class="nav-link disabled" href="">Project 3</a>
@@ -35,7 +35,7 @@
     </header>
     <section>
       <header id="header-main" class="jumbotron text-center mb-0">
-        <img class="img-fluid rounded-circle" src="images/profile_picture.jpg"
+        <img class="img-fluid rounded-circle mb-3" src="images/profile_picture.jpg"
           alt="Profile Picture" width=300 height=300>
         <h1>Jacob Mendelowitz</h1>
         <p class="lead">I'm Jacob Mendelowitz, a Computer Engineering student at Bucknell
@@ -60,42 +60,42 @@
               <div class="carousel-caption text-left">
                 <h1>Ready, Set, Fit</h1>
                 <p>A project that has been a big part of my undergraduate experience. The Ready, Set, Fit app.</p>
-                <p><a class="btn btn-lg btn-primary" href="https://readysetfitapp.org/" role="button">Read About It</a></p>
+                <p><a class="btn btn-lg btn-primary" href="https://readysetfitapp.org/">Read About It</a></p>
               </div>
             </div>
           </div>
           <div class="carousel-item">
             <div class="second-slide text-center bg-secondary">
               <img class="img-fluid"
-                src="https://www.bucknell.edu/images/Depts/2017News/November/SusquehannaRS800x600.jpg" alt="Second slide">
+                src="https://www.bucknell.edu/images/Depts/2017News/July/SBDCevent800x600.jpg" alt="Second slide">
             </div>
             <div class="container">
               <div class="carousel-caption text-left">
                 <h1>Play Impossible Gameball</h1>
                 <p>Check out some of the work I've done with a local Lewisburg start-up.</p>
-                <p><a class="btn btn-lg btn-primary" href="https://www.bucknell.edu/news-and-media/current-news/2017/july/small-business-development-center-celebrates-local-entrepreneurs.html" role="button">Read About It</a></p>
+                <p><a class="btn btn-lg btn-primary" href="https://www.bucknell.edu/news-and-media/current-news/2017/july/small-business-development-center-celebrates-local-entrepreneurs.html">Read About It</a></p>
               </div>
             </div>
           </div>
           <div class="carousel-item">
             <div class="third-slide text-center bg-secondary">
-              <img class="third-slide"
-                src="https://www.bucknell.edu/images/Depts/2017News/July/SBDCevent800x600.jpg" alt="Third slide">
+              <img class="img-fluid"
+                src="https://www.bucknell.edu/images/Depts/2017News/November/SusquehannaRS800x600.jpg" alt="Third slide">
             </div>
             <div class="container">
               <div class="carousel-caption text-left">
                 <h1>Susquehanna Research Symposium</h1>
                 <p>In an unlikely turn of events, I presented a mobile app at a symposium about water quality.</p>
-                <p><a class="btn btn-lg btn-primary" href="https://www.bucknell.edu/news-and-media/current-news/2017/november/symposium-channels-the-spirit-of-the-susquehanna.html" role="button">Read About It</a></p>
+                <p><a class="btn btn-lg btn-primary" href="https://www.bucknell.edu/news-and-media/current-news/2017/november/symposium-channels-the-spirit-of-the-susquehanna.html">Read About It</a></p>
               </div>
             </div>
           </div>
         </div>
-        <a class="carousel-control-prev" href="#image_carousel-main" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#image_carousel-main" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#image_carousel-main" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#image_carousel-main" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
@@ -103,15 +103,15 @@
     </section>
 
     <section id="projects-main">
-      <header class="mx-5">
+      <header class="mx-5 my-5 text-center text-lg-left">
         <h2>What's on This Site?</h2>
         <p>Below are three different projects featuring various full stack web technologies.</p>
       </header>
 
       <hr class="featurette-divider">
 
-      <article id="projects-project1" class="row featurette mx-5 my-3">
-        <div class="col-md-7">
+      <article id="projects-project1" class="row featurette mx-5 my-5">
+        <div class="col-lg-7 text-center text-lg-left">
           <h2 class="featurette-heading">Project 1: <span class="text-muted">Responsive Web Site</span></h2>
           <p class="lead">
             Project 1 explores responsive website design. It uses mobile first
@@ -119,66 +119,92 @@
             The project includes a simple website using basic CSS, and another
             version using Bootstrap CSS classes.
           </p>
-          <a class="btn btn-primary mr-xs-0 mr-md-3" role="button"
-            href="project1a/index.html">Responsive Website Without Bootstrap</a>
-          <a class="btn btn-primary ml-xs-0 ml-md-3" role="button"
-            href="project1b/index.html">Responsive Website With Bootstrap</a>
+          <a class="btn btn-primary mr-0 mr-md-3 mt-2 mb-3 mb-lg-0" href="project1a/index.html">
+            Website Without Bootstrap
+          </a>
+          <a class="btn btn-primary ml-0 ml-md-3 mt-2 mb-3 mb-lg-0" href="project1b/index.html">
+            Website With Bootstrap
+          </a>
         </div>
-        <div class="col-md-5 bg-secondary"></div>
+        <div class="col-lg-5 bg-secondary">
+          <img class="img-fluid p-3" src="images/responsive_website_screenshot.png" alt="Responsive Website"></img>
+        </div>
       </article>
 
       <hr class="featurette-divider">
 
-      <article id="projects-project2" class="row featurette mx-5 my-3">
-        <div class="col-md-7 order-md-2">
+      <article id="projects-project2" class="row featurette mx-5 my-5">
+        <div class="col-lg-7 order-lg-2 text-center text-lg-left">
           <h2 class="featurette-heading">Project 2: <span class="text-muted">React Web Application</span></h2>
           <p class="lead">
             Project 2 explores using React.js to create a web application.
             The assignment involved redesigning the Bucknell Course Lookup
             website to be more modern and responsive.
           </p>
-          <a class="btn btn-primary mr-xs-0 mr-md-3" role="button"
-            href="project2/build">React Course Lookup</a>
+          <a class="btn btn-primary mt-2 mb-3 mb-lg-0" href="project2/build/index.html">
+            React Course Lookup
+          </a>
         </div>
-        <div class="col-md-5 order-md-1 bg-secondary"></div>
+        <div class="col-lg-5 bg-secondary">
+          <img class="img-fluid p-3" src="images/responsive_website_screenshot.png" alt="Responsive Website"></img>
+        </div>
       </article>
 
       <hr class="featurette-divider">
 
-      <article id="projects-project3" class="row featurette mx-5 my-3">
-        <div class="col-md-7">
+      <article id="projects-project3" class="row featurette mx-5 my-5">
+        <div class="col-lg-7 text-center text-lg-left">
           <h2 class="featurette-heading">Project 3: <span class="text-muted">Coming Soon</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <p class="lead">
+            Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id
+            ligula porta felis euismod semper. Praesent commodo cursus magna,
+            vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+          </p>
+          <a class="btn btn-secondary mt-2 mb-3 mb-lg-0" href="javascript:void(0)">
+            Coming Soon!
+          </a>
         </div>
-        <div class="col-md-5 bg-secondary"></div>
+        <div class="col-lg-5 bg-secondary">
+          <img class="img-fluid p-3" src="images/responsive_website_screenshot.png" alt="Responsive Website"></img>
+        </div>
       </article>
 
       <hr class="featurette-divider">
 
       <article id="projects-additional_coursework" class="container marketing text-center">
-        <h2>Additional Coursework</h2>
+        <h2 class="my-5">Additional Coursework</h2>
         <div class="row">
           <div class="col-lg-4">
-            <img class="rounded-circle mb-3" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+            <img class="rounded-circle mb-3" src="images/google_fonts.png" alt="Portfolio Fonts" width="150" height="150">
             <h2>Portfolio Fonts</h2>
-            <p>Click this button to explore the fonts of this web page.</p>
+            <p>
+              Click this button to explore the fonts of this web page. All fonts were found using
+              Google's font service.
+            </p>
             <p><a class="btn btn-primary" href="font_fun/fontfun.html" role="button">View Details</a></p>
           </div>
-          <div class="col-lg-4">
-            <img class="rounded-circle mb-3" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+          <div class="col-lg-4 pt-5 pt-lg-0">
+            <img class="rounded-circle mb-3 p-3" src="images/bootstrap_logo.png" alt="Bootstrap" width="150" height="150">
             <h2>Bootstrap Examples</h2>
-            <p>Here are a couple of Bootstrap examples I built off of and drew inspiration from on this web page.</p>
+            <p>
+              Here are a couple of Bootstrap examples I built off of and drew inspiration from on this web page.
+            </p>
             <p><a class="btn btn-primary" href="project1b/bootstrap_examples/navbar.html" role="button">Navbar Bootstrap Example</a></p>
             <p><a class="btn btn-primary" href="project1b/bootstrap_examples/carousel.html" role="button">Carousel Bootstrap Example</a></p>
           </div>
-          <div class="col-lg-4">
-            <img class="rounded-circle mb-3" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+          <div class="col-lg-4 pt-5 pt-lg-0">
+            <img class="rounded-circle mb-3" src="images/dog_api.png" alt="Dog API" width="150" height="150">
             <h2>Fetch and Promise with the Dog API</h2>
-            <p>Check out an example of using fetch to get images of dogs.</p>
+            <p>
+              Check out an example of using JavaScript fetch to get images of dogs.
+            </p>
             <p><a class="btn btn-primary" href="dog_api/index.html" role="button">View Page</a></p>
           </div>
         </div>
       </article>
     </section>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>

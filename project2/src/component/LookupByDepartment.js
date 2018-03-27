@@ -11,7 +11,7 @@ class LookupByDepartment extends BaseLookupMethod {
     this.onDepartmentChange = this.onDepartmentChange.bind(this);
     this.onDepartmentSubmit = this.onDepartmentSubmit.bind(this);
     this.state = {
-      department: "",
+      department: Constants.DEPARTMENTS[0],
       courseData: null,
       lastSearch: ""
     };
@@ -26,7 +26,6 @@ class LookupByDepartment extends BaseLookupMethod {
     if (this.state.department) {
       if (this.state.department !== this.state.lastSearch) {
         this.setState({ lastSearch: this.state.department });
-        this.props.resetAmountLoaded();
         this.loadCoursesBySearching(this.state.department.slice(0, 4));
       }
     } else {
@@ -55,8 +54,8 @@ class LookupByDepartment extends BaseLookupMethod {
       <div className="p-4">
         <Form className="base_lookup-form" onSubmit={this.onDepartmentSubmit} inline>
           <Label for="dept_entry" className="text-center">Enter a department:</Label>
-          <Input id="dept_entry" className="ml-sm-3 mt-2 mt-sm-0" type="select" value={this.state.department}
-            placeholder="Enter department" onChange={this.onDepartmentChange}>
+          <Input id="dept_entry" className="ml-sm-3 mt-2 mt-sm-0" type="select"
+            value={this.state.department} onChange={this.onDepartmentChange}>
             {departments}
           </Input>
           <Button
@@ -65,7 +64,7 @@ class LookupByDepartment extends BaseLookupMethod {
             Find Courses
           </Button>
         </Form>
-        <CourseList courseData={this.state.courseData} amountLoaded={this.props.amountLoaded}/>
+        <CourseList courseData={this.state.courseData}/>
       </div>
     );
   }

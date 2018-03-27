@@ -12,8 +12,8 @@ class LookupByMajor extends BaseLookupMethod {
     this.onClassYearChange = this.onClassYearChange.bind(this);
     this.onMajorSubmit = this.onMajorSubmit.bind(this);
     this.state = {
-      major: "Computer Engineering",
-      classYear: "Any",
+      major: Constants.MAJORS[0].name,
+      classYear: Constants.CLASS_YEARS[0],
       courses: [],
       courseData: null,
       lastSearch: ""
@@ -33,7 +33,6 @@ class LookupByMajor extends BaseLookupMethod {
     if (this.state.major && this.state.classYear) {
       if ((this.state.major + this.state.classYear) !== this.state.lastSearch) {
         this.setState({ lastSearch: this.state.major + this.state.classYear });
-        this.props.resetAmountLoaded();
         this.loadRequiredCourses();
       }
     } else {
@@ -71,8 +70,8 @@ class LookupByMajor extends BaseLookupMethod {
   loadRequiredCourses() {
     let courseQueryList = [];
     for (let major of Constants.MAJORS) {
-      if (this.state.major === major) {
-        courseQueryList = this.getCoursesForMajor(Constants.COMPUTER_SCIENCE_MAJOR);
+      if (this.state.major === major.name) {
+        courseQueryList = this.getCoursesForMajor(major.courses);
       }
     }
     Promise.all(courseQueryList)
@@ -87,7 +86,7 @@ class LookupByMajor extends BaseLookupMethod {
 
   render() {
     const buttonColor = (this.state.major && this.state.classYear) ? "primary" : "secondary";
-    const majors = Constants.MAJORS.map((major, i) => <option key={i}>{major}</option>);
+    const majors = Constants.MAJORS.map((major, i) => <option key={i}>{major.name}</option>);
     const classYears = Constants.CLASS_YEARS.map((classYear, i) => <option key={i}>{classYear}</option>);
     return (
       <div className="p-4">
@@ -104,7 +103,7 @@ class LookupByMajor extends BaseLookupMethod {
           </Input>
           <Button className="ml-sm-3 mt-3 mt-sm-0" color={buttonColor} onClick={this.onMajorSubmit}>Find Courses</Button>
         </Form>
-        <CourseList courseData={this.state.courseData} amountLoaded={this.props.amountLoaded}/>
+        <CourseList courseData={this.state.courseData}/>
       </div>
     );
   }

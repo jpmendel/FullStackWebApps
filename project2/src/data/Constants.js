@@ -70,33 +70,91 @@ const Constants = {
     "WMST (Women's and Gender Studies)"
   ],
   REQUIREMENTS: [
-    { value: "ARHC", display: "Arts and Humanities" },
-    { value: "AHLG", display: "Arts and Humanities Learning Goals" },
-    { value: "CBL", display: "Community Based Learning" },
-    { value: "DUSC", display: "Diversity in the U.S." },
-    { value: "GLSP", display: "Engineering Global and Societal Perspectives" },
-    { value: "EGHU", display: "Engineering Humanities" },
-    { value: "EGSS", display: "Engineering Social Science" },
-    { value: "EVCN", display: "Environmental Connections" },
-    { value: "FRST", display: "First Year Course" },
-    { value: "CCFL", display: "Foreign Language" },
-    { value: "FOUN", display: "Foundation Seminar" },
-    { value: "GBCC", display: "Global Connections" },
-    { value: "CCIP", display: "Integrated Perspectives" },
-    { value: "LBSC", display: "Lab Science" },
-    { value: "NSMC", display: "Natural Science and Mathematics" },
-    { value: "NMLG", display: "Natural Science and Mathematics Learning Goals" },
-    { value: "CCQR", display: "Quantitative Reasoning" },
-    { value: "SL", display: "Service Learning Course" },
-    { value: "SLSC", display: "Social Science" },
-    { value: "SSLG", display: "Social Science Learning Goals" },
-    { value: "W1", display: "Writing Level 1" },
-    { value: "W2", display: "Writing Level 2" }
+    "ARHC (Arts and Humanities)",
+    "AHLG (Arts and Humanities Learning Goals)",
+    "CBL (Community Based Learning)",
+    "DUSC (Diversity in the U.S.)",
+    "GLSP (Engr. Global and Societal Perspectives)",
+    "EGHU (Engineering Humanities)",
+    "EGSS (Engineering Social Science)",
+    "EVCN (Environmental Connections)",
+    "FRST (First Year Course)",
+    "CCFL (Foreign Language)",
+    "FOUN (Foundation Seminar)",
+    "GBCC (Global Connections)",
+    "CCIP (Integrated Perspectives)",
+    "LBSC (Lab Science)",
+    "NSMC (Natural Science and Mathematics)",
+    "NMLG (Natural Science and Math Learning Goals)",
+    "CCQR (Quantitative Reasoning)",
+    "SL (Service Learning Course)",
+    "SLSC (Social Science)",
+    "SSLG (Social Science Learning Goals)",
+    "W1 (Writing Level 1)",
+    "W2 (Writing Level 2)"
   ],
   MAJORS: [
-    "Computer Engineering",
-    "Computer Science and Engineering",
-    "Electrical Engineering"
+    {
+      name: "Computer Engineering",
+      courses: {
+        FIRST_YEAR_COURSES: [
+          "MATH 201", "PHYS 211", "ENGR 100",
+          "MATH 202", "PHYS 212", "ECEG 100"
+        ],
+        SOPHOMORE_COURSES: [
+          "MATH 211", "ECEG 210", "ECEG 240",
+          "MATH 241", "ECEG 270", "ECEG 247"
+        ],
+        JUNIOR_COURSES: [
+          "ECEG 370", "CSCI 204", "ECEG 301",
+          "CSCI 205", "ECEG 310"
+        ],
+        SENIOR_COURSES: [
+          "ECEG 400", "ECEG 401"
+        ]
+      },
+    },
+    {
+      name: "Computer Science and Engineering",
+      courses: {
+        FIRST_YEAR_COURSES: [
+          "MATH 201", "PHYS 211", "ENGR 100",
+          "MATH 202", "PHYS 212", "CSCI 203"
+        ],
+        SOPHOMORE_COURSES: [
+          "CSCI 204", "MATH 211", "CHEM 201",
+          "CSCI 205", "CSCI 206", "ENGR 211", "MATH 222", "MATH 241"
+        ],
+        JUNIOR_COURSES: [
+          "CSCI 208", "CSCI 315", "ECEG 101", "MATH 226",
+          "CSCI 240", "CSCI 245", "CSCI 311", "ECEG 245"
+        ],
+        SENIOR_COURSES: [
+          "CSCI 320", "CSCI 475", "MATH 343", "MATH 245",
+          "CSCI 476"
+        ]
+      },
+    },
+    {
+      name: "Electrical Engineering",
+      courses: {
+        FIRST_YEAR_COURSES: [
+          "MATH 201", "PHYS 211", "ENGR 100",
+          "MATH 202", "PHYS 212", "ECEG 100"
+        ],
+        SOPHOMORE_COURSES: [
+          "MATH 211", "ECEG 210", "ECEG 240", "ECEG 201",
+          "MATH 212", "MATH 245", "ECEG 270", "ECEG 247"
+        ],
+        JUNIOR_COURSES: [
+          "CHEM 201", "PHYS 222", "ECEG 370", "ECEG 350", "ECEG 301",
+          "ECEG 390", "ECEG 310"
+        ],
+        SENIOR_COURSES: [
+          "ECEG 400", "ECEG 401"
+        ]
+      }
+    }
   ],
   CLASS_YEARS: [
     "Any",
@@ -104,59 +162,7 @@ const Constants = {
     "Sophomore",
     "Junior",
     "Senior"
-  ],
-  COMPUTER_SCIENCE_MAJOR: {
-    FIRST_YEAR_COURSES: [
-      "MATH 201", "PHYS 211", "ENGR 100",
-      "MATH 202", "PHYS 212", "CSCI 203"
-    ],
-    SOPHOMORE_COURSES: [
-      "CSCI 204", "MATH 211", "CHEM 201",
-      "CSCI 205", "CSCI 206", "ENGR 211", "MATH 222", "MATH 241"
-    ],
-    JUNIOR_COURSES: [
-      "CSCI 208", "CSCI 315", "ECEG 101", "MATH 226",
-      "CSCI 240", "CSCI 245", "CSCI 311", "ECEG 245"
-    ],
-    SENIOR_COURSES: [
-      "CSCI 320", "CSCI 475", "MATH 343", "MATH 245",
-      "CSCI 476"
-    ]
-  },
-  COMPUTER_ENGINEERING_MAJOR: {
-    FIRST_YEAR_COURSES: [
-      "MATH 201", "PHYS 211", "ENGR 100",
-      "MATH 202", "PHYS 212", "ECEG 100"
-    ],
-    SOPHOMORE_COURSES: [
-      "MATH 211", "ECEG 210", "ECEG 240",
-      "MATH 241", "ECEG 270", "ECEG 247"
-    ],
-    JUNIOR_COURSES: [
-      "ECEG 370", "CSCI 204", "ECEG 301",
-      "CSCI 205", "ECEG 310"
-    ],
-    SENIOR_COURSES: [
-      "ECEG 400", "ECEG 401"
-    ]
-  },
-  ELECTRICAL_ENGINEERING_MAJOR: {
-    FIRST_YEAR_COURSES: [
-      "MATH 201", "PHYS 211", "ENGR 100",
-      "MATH 202", "PHYS 212", "ECEG 100"
-    ],
-    SOPHOMORE_COURSES: [
-      "MATH 211", "ECEG 210", "ECEG 240", "ECEG 201",
-      "MATH 212", "MATH 245", "ECEG 270", "ECEG 247"
-    ],
-    JUNIOR_COURSES: [
-      "CHEM 201", "PHYS 222", "ECEG 370", "ECEG 350", "ECEG 301",
-      "ECEG 390", "ECEG 310"
-    ],
-    SENIOR_COURSES: [
-      "ECEG 400", "ECEG 401"
-    ]
-  }
+  ]
 }
 
 export default Constants;

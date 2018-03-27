@@ -106,7 +106,7 @@ class CourseCard extends React.Component {
             <CardSubtitle>{course.Title}</CardSubtitle>
             <CardText>{"Section " + course.Section}</CardText>
             <InputGroup className="course_card-input_group" size="sm">
-              <Input className="text-center" value={course.CRN} readOnly/>
+              <Input className="course_card-input text-center" value={course.CRN} readOnly/>
               <InputGroupAddon addonType="append">
                 <CopyToClipboard id={"C" + course.CRN} text={course.CRN} onCopy={this.onCopyCRN}>
                   <Button className="pt-2" color="primary">{copyIcon}</Button>

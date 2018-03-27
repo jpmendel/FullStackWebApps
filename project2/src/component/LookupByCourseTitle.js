@@ -49,7 +49,6 @@ class LookupByCourseTitle extends BaseLookupMethod {
     if (this.state.courseTitle) {
       if (this.state.courseTitle !== this.state.lastSearch) {
         this.setState({ lastSearch: this.state.courseTitle });
-        this.props.resetAmountLoaded();
         const courseIDs = this.searchForCourseIDs(this.state.courseTitle);
         if (courseIDs !== null) {
           this.loadCoursesByID(courseIDs);
@@ -110,7 +109,7 @@ class LookupByCourseTitle extends BaseLookupMethod {
             Find Courses
           </Button>
         </Form>
-        <CourseList className="mt-4" courseData={this.state.courseData} amountLoaded={this.props.amountLoaded}/>
+        <CourseList className="mt-4" courseData={this.state.courseData}/>
       </div>
     );
   }

@@ -12,6 +12,11 @@
   margin: auto;
 }
 
+.course_card-input {
+  background-color: #F0F0F0 !important;
+  color: black !important;
+}
+
 .course_card-more_info_button {
   background-color: darkorange !important;
   border-color: darkorange !important;
