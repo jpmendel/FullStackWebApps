@@ -7,8 +7,16 @@ h1, h2, h3 {
   font-family: "Open Sans", sans-serif;
 }
 
-.util-image_vertical_center {
+.navbar-project_link {
+  color: #BBBBBB !important;
+}
+
+.navbar-project_link:hover {
+  color: #FFFFFF !important;
+}
+
+.util-vertical_center {
   display: flex;
-  min-height: 100%;
-  align-items: middle;
+  flex-direction: column;
+  align-items: center;
 }

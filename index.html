@@ -18,16 +18,16 @@
         <div id="navbar-content" class="collapse navbar-collapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="project1a/index.html">Project 1a</a>
+              <a class="nav-link navbar-project_link" href="project1a/index.html">Project 1a</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="project1b/index.html">Project 1b</a>
+              <a class="nav-link navbar-project_link" href="project1b/index.html">Project 1b</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="project2/build/index.html">Project 2</a>
+              <a class="nav-link navbar-project_link" href="project2/build/index.html">Project 2</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="">Project 3</a>
+              <a class="nav-link navbar-project_link" href="">Project 3</a>
             </li>
           </ul>
         </div>
@@ -112,22 +112,24 @@
 
       <article id="projects-project1" class="row featurette mx-5 my-5">
         <div class="col-lg-7 text-center text-lg-left">
-          <h2 class="featurette-heading">Project 1: <span class="text-muted">Responsive Web Site</span></h2>
-          <p class="lead">
-            Project 1 explores responsive website design. It uses mobile first
-            principles to lay out a simple website with HTML and CSS.
-            The project includes a simple website using basic CSS, and another
-            version using Bootstrap CSS classes.
-          </p>
-          <a class="btn btn-primary mr-0 mr-md-3 mt-2 mb-3 mb-lg-0" href="project1a/index.html">
-            Website Without Bootstrap
-          </a>
-          <a class="btn btn-primary ml-0 ml-md-3 mt-2 mb-3 mb-lg-0" href="project1b/index.html">
-            Website With Bootstrap
-          </a>
+          <div>
+            <h2 class="featurette-heading">Project 1: <span class="text-muted">Responsive Web Site</span></h2>
+            <p class="lead">
+              Project 1 explores responsive website design. It uses mobile first
+              principles to lay out a simple website with HTML and CSS.
+              The project includes a simple website using basic CSS, and another
+              version using Bootstrap CSS classes.
+            </p>
+            <a class="btn btn-primary mr-0 mr-lg-2 mt-2 mb-3 mb-lg-0" href="project1a/index.html">
+              Website Without Bootstrap
+            </a>
+            <a class="btn btn-primary ml-0 ml-lg-2 mt-2 mb-3 mb-lg-0" href="project1b/index.html">
+              Website With Bootstrap
+            </a>
+          </div>
         </div>
         <div class="col-lg-5 bg-secondary">
-          <img class="img-fluid p-3" src="images/responsive_website_screenshot.png" alt="Responsive Website"></img>
+          <img class="img-fluid py-3" src="images/responsive_website.png" alt="Responsive Website"></img>
         </div>
       </article>
 
@@ -146,7 +148,7 @@
           </a>
         </div>
         <div class="col-lg-5 bg-secondary">
-          <img class="img-fluid p-3" src="images/responsive_website_screenshot.png" alt="Responsive Website"></img>
+          <img class="img-fluid py-3" src="images/responsive_website.png" alt="Responsive Website"></img>
         </div>
       </article>
 
@@ -165,7 +167,7 @@
           </a>
         </div>
         <div class="col-lg-5 bg-secondary">
-          <img class="img-fluid p-3" src="images/responsive_website_screenshot.png" alt="Responsive Website"></img>
+          <img class="img-fluid py-3" src="images/responsive_website.png" alt="Responsive Website"></img>
         </div>
       </article>
 
@@ -189,8 +191,10 @@
             <p>
               Here are a couple of Bootstrap examples I built off of and drew inspiration from on this web page.
             </p>
-            <p><a class="btn btn-primary" href="project1b/bootstrap_examples/navbar.html" role="button">Navbar Bootstrap Example</a></p>
-            <p><a class="btn btn-primary" href="project1b/bootstrap_examples/carousel.html" role="button">Carousel Bootstrap Example</a></p>
+            <div class="btn-group" role="group" aria-label="Bootstrap examples">
+              <a class="btn btn-primary" href="project1b/bootstrap_examples/navbar.html">Navbar</a>
+              <a class="btn btn-primary" href="project1b/bootstrap_examples/carousel.html">Carousel</a>
+            </div>
           </div>
           <div class="col-lg-4 pt-5 pt-lg-0">
             <img class="rounded-circle mb-3" src="images/dog_api.png" alt="Dog API" width="150" height="150">
