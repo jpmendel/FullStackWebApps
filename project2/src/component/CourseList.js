@@ -22,7 +22,7 @@ class CourseList extends React.Component {
       if (this.props.courseData === "invalid") {
         return (
           <Row key={"invalid"}>
-            <div className="text-center mt-5 w-100" key="none">Please enter valid input.</div>
+            <div className="text-center mt-5 w-100" key="none">Please enter something to search.</div>
           </Row>
         );
       } else if (this.props.courseData === "none") {

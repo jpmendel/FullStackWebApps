@@ -1,5 +1,6 @@
 const Constants = {
   SERVER_URL: "https://www.eg.bucknell.edu/~amm042/service/",
+  BUCKNELL_COURSE_INFO_URL: "https://www.bannerssb.bucknell.edu",
   DEPARTMENTS: [
     "ACFM (Acct & Financial Management)",
     "AFST (Africana Studies)",

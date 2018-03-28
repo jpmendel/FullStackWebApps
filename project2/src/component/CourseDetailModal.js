@@ -2,6 +2,8 @@ import React from "react";
 import {Modal, ModalHeader, ModalBody, ModalFooter, Button} from "reactstrap";
 import CopyToClipboard from "react-copy-to-clipboard";
 
+import Constants from "../data/Constants.js";
+
 class CourseDetailModal extends React.Component {
   constructor(props) {
     super(props);
@@ -17,8 +19,7 @@ class CourseDetailModal extends React.Component {
     const href = courseDescTag.match("href=\".*\"");
     if (href.length > 0) {
       const descLink = href[0].slice(6, -1).replace(/amp;/g, "");
-      console.log(descLink);
-      return "https://www.bannerssb.bucknell.edu" + descLink;
+      return Constants.BUCKNELL_COURSE_INFO_URL + descLink;
     }
     return "";
   }
