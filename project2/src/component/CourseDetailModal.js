@@ -121,11 +121,15 @@ class CourseDetailModal extends React.Component {
               <b>Needs Permission:</b> {this.props.course.Prm ? "Yes" : "No"}
             </ModalBody>
             <ModalFooter>
-              <Button color="info" onClick={this.onOpenCourseDescription}>Course Description</Button>
-              <CopyToClipboard text={this.props.course.CRN} onCopy={this.onCopyCRN}>
-                <Button color="primary">{copyText}</Button>
-              </CopyToClipboard>
-              <Button color="secondary" onClick={this.onCloseModal}>Close</Button>
+              <div className="text-left w-50">
+                <Button color="info" onClick={this.onOpenCourseDescription}>Course Desc</Button>
+              </div>
+              <div className="text-right w-50">
+                <CopyToClipboard text={this.props.course.CRN} onCopy={this.onCopyCRN}>
+                  <Button color="primary">{copyText}</Button>
+                </CopyToClipboard>
+                <Button className="ml-2" color="secondary" onClick={this.onCloseModal}>Close</Button>
+              </div>
             </ModalFooter>
           </Modal>
         </div>
