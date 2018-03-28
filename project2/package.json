@@ -1,6 +1,6 @@
 {
-  "name": "project2",
-  "version": "0.1.0",
+  "name": "react-bucknell-course-lookup",
+  "version": "0.8.0",
   "private": true,
   "homepage": "https://jpmendel.github.io/FullStackWebApps/project2/build",
   "dependencies": {
@@ -10,7 +10,6 @@
     "material-ui-icons": "^1.0.0-beta.36",
     "react": "^16.2.0",
     "react-addons-css-transition-group": "^15.6.2",
-    "react-autosuggest": "^9.3.4",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.2.0",
     "react-popper": "^0.8.3",

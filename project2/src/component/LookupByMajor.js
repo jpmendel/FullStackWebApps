@@ -91,12 +91,16 @@ class LookupByMajor extends BaseLookupMethod {
     return (
       <div className="p-4">
         <Form className="base_lookup-form" onSubmit={this.onMajorSubmit} inline>
-          <Label for="major_entry" className="mt-2 mt-sm-0">Select your major:</Label>
+          <Label for="major_entry" className="mt-2 mt-sm-0">
+            Select your major:
+          </Label>
           <Input id="major_entry" className="ml-sm-3 mt-3 mt-sm-0" type="select" value={this.state.major}
             onChange={this.onMajorChange}>
             {majors}
           </Input>
-          <Label for="class_year_entry" className="ml-sm-3 mt-3 mt-sm-0">and your class year:</Label>
+          <Label for="class_year_entry" className="ml-sm-3 mt-3 mt-sm-0">
+            and your class year:
+          </Label>
           <Input id="class_year_entry" className="ml-sm-3 mt-3 mt-sm-0" type="select" value={this.state.classYear}
             onChange={this.onClassYearChange}>
             {classYears}

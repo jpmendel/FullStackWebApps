@@ -100,7 +100,9 @@ class LookupByCourseTitle extends BaseLookupMethod {
     return (
       <div className="p-4">
         <Form className="base_lookup-form" onSubmit={this.onCourseTitleSubmit} inline>
-          <Label for="title_entry" className="text-center">Enter a course title or course ID (ex. CSCI 204):</Label>
+          <Label for="title_entry" className="text-center">
+            Enter a course title or course ID (ex. CSCI 204):
+          </Label>
           <Input id="title_entry" className="base_lookup-input ml-sm-3 mt-2 mt-sm-0" value={this.state.courseTitle}
             placeholder="Enter course title or ID" onChange={this.onCourseTitleChange}/>
           <Button

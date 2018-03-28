@@ -1,6 +1,5 @@
 import React from "react";
 import {Navbar, Nav, NavItem, NavLink, NavbarToggler, Collapse} from "reactstrap";
-import classnames from "classnames";
 
 class NavigationMenu extends React.Component {
   constructor(props) {
