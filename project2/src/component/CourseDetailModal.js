@@ -1,14 +1,13 @@
 import React from "react";
 import {Modal, ModalHeader, ModalBody, ModalFooter, Button} from "reactstrap";
 import CopyToClipboard from "react-copy-to-clipboard";
-import ContentCopyIcon from "material-ui-icons/ContentCopy";
-import DoneIcon from "material-ui-icons/Done";
 
 class CourseDetailModal extends React.Component {
   constructor(props) {
     super(props);
     this.onCopyCRN = this.onCopyCRN.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
+    this.onOpenCourseDescription = this.onOpenCourseDescription.bind(this);
     this.state = {
       copiedCRN: false
     };
@@ -69,6 +68,16 @@ class CourseDetailModal extends React.Component {
     return meetingTimesWithRooms;
   }
 
+  getCourseDescriptionLink(courseDescTag) {
+    const href = courseDescTag.match("href=\".*\"");
+    if (href.length > 0) {
+      const descLink = href[0].slice(6, -1).replace(/amp;/g, "");
+      console.log(descLink);
+      return "https://www.bannerssb.bucknell.edu" + descLink;
+    }
+    return "";
+  }
+
   onCopyCRN() {
     this.setState({ copiedCRN: true });
   }
@@ -76,6 +85,10 @@ class CourseDetailModal extends React.Component {
   onCloseModal() {
     this.setState({ copiedCRN: false });
     this.props.toggle();
+  }
+
+  onOpenCourseDescription() {
+    window.open(this.getCourseDescriptionLink(this.props.course.CrseDesc), "_blank");
   }
 
   render() {
@@ -108,6 +121,7 @@ class CourseDetailModal extends React.Component {
               <b>Needs Permission:</b> {this.props.course.Prm ? "Yes" : "No"}
             </ModalBody>
             <ModalFooter>
+              <Button color="info" onClick={this.onOpenCourseDescription}>Course Description</Button>
               <CopyToClipboard text={this.props.course.CRN} onCopy={this.onCopyCRN}>
                 <Button color="primary">{copyText}</Button>
               </CopyToClipboard>

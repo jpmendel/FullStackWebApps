@@ -26,7 +26,7 @@ class LookupByRequirement extends BaseLookupMethod {
     if (this.state.courseReq) {
       if (this.state.courseReq !== this.state.lastSearch) {
         this.setState({ lastSearch: this.state.courseReq });
-        this.loadCoursesBySearching(this.state.courseReq.slice(0, 4));
+        this.loadCoursesBySearching(this.state.courseReq);
       }
     } else {
       if (this.state.courseData === null) {

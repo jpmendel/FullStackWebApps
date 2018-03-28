@@ -26,7 +26,7 @@ class LookupByDepartment extends BaseLookupMethod {
     if (this.state.department) {
       if (this.state.department !== this.state.lastSearch) {
         this.setState({ lastSearch: this.state.department });
-        this.loadCoursesBySearching(this.state.department.slice(0, 4));
+        this.loadCoursesBySearching(this.state.department);
       }
     } else {
       if (this.state.courseData === null) {
@@ -36,7 +36,13 @@ class LookupByDepartment extends BaseLookupMethod {
   }
 
   loadCoursesBySearching(department) {
-    const query = `Department=${department.toUpperCase()}`;
+    let dept = "";
+    let i = 0;
+    while (department.charAt(i).match("[a-zA-Z0-9]")) {
+      dept += department.charAt(i);
+      i++;
+    }
+    const query = `Department=${dept.toUpperCase()}`;
     this.getCoursesByQuery(query)
       .then((data) => {
         if (data.message.length > 0) {

@@ -22,7 +22,7 @@ class NavigationMenu extends React.Component {
       this.setState({
         activeTab: tab
       });
-      this.props.changeLookupType(tab);
+      this.props.onTabSelected(tab);
     }
     if (this.state.navbarOpen) {
       this.setState({ navbarOpen: false });

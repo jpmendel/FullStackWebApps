@@ -122,7 +122,7 @@ class CourseCard extends React.Component {
             <CardText>{course.Instructor}</CardText>
             {meetingTimesWithRooms}
             <Button
-              className="course_card-more_info_button w-50"
+              className="course_card-view_details_button w-50"
               onClick={this.onViewDetail}>
               View Details
             </Button>

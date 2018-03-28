@@ -31,9 +31,6 @@ class CourseLookup extends React.Component {
 
   onWindowScrolled(event) {
     this.setState({ shouldShowScrollTopButton: (window.scrollY > 50) });
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
-      this.setState({ amountLoaded: this.state.amountLoaded + 16 });
-    }
   }
 
   scrollToTop() {
@@ -41,7 +38,7 @@ class CourseLookup extends React.Component {
   }
 
   changeLookupType(type) {
-    this.setState({ lookupType: type, amountLoaded: 16 });
+    this.setState({ lookupType: type });
   }
 
   render() {
@@ -63,7 +60,7 @@ class CourseLookup extends React.Component {
     }
     return (
       <div>
-        <NavigationMenu changeLookupType={this.changeLookupType}/>
+        <NavigationMenu onTabSelected={this.changeLookupType}/>
         <ReactCSSTransitionGroup
           transitionName="course_lookup_fade"
           transitionEnter={true}

@@ -37,7 +37,7 @@ class CourseList extends React.Component {
           const course = this.props.courseData[i];
           courseListKey += course.Course;
           courseList.push(
-            <Col className="my-3" xs={12} sm={6} md={4} lg={3} key={course.Course + " " + i}>
+            <Col className="my-3" xs={12} sm={6} md={4} xl={3} key={course.Course + " " + i}>
               <CourseCard
                 course={course} onViewDetail={this.onToggleModal}
                 lastCopiedCRN={this.state.lastCopiedCRN} onCopyCRN={this.onCopyCRN}/>
