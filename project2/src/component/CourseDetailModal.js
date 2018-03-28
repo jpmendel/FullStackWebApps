@@ -6,66 +6,11 @@ class CourseDetailModal extends React.Component {
   constructor(props) {
     super(props);
     this.onCopyCRN = this.onCopyCRN.bind(this);
-    this.onCloseModal = this.onCloseModal.bind(this);
+    this.onToggleModal = this.onToggleModal.bind(this);
     this.onOpenCourseDescription = this.onOpenCourseDescription.bind(this);
     this.state = {
       copiedCRN: false
     };
-  }
-
-  parseRooms(courseRoom) {
-    let rooms = [];
-    let room = "";
-    let counter = 0;
-    while (counter < courseRoom.length) {
-      room += courseRoom.charAt(counter);
-      if (room.length >= 8) {
-        rooms.push(room);
-        room = "";
-        counter++;
-      }
-      counter++;
-    }
-    return rooms;
-  }
-
-  parseMeetingTimes(courseMeetingTime) {
-    let meetingTimes = [];
-    let meetingTime = "";
-    let counter = 0;
-    while (counter < courseMeetingTime.length) {
-      meetingTime += courseMeetingTime.charAt(counter);
-      const lastTwo = meetingTime.slice(-2);
-      if (lastTwo === "am" || lastTwo === "pm") {
-        meetingTimes.push(meetingTime);
-        meetingTime = "";
-        counter++;
-      }
-      counter++;
-    }
-    return meetingTimes;
-  }
-
-  findMeetingTimesWithRooms() {
-    const meetingTimes = this.parseMeetingTimes(this.props.course["Meeting Time"] || "");
-    const rooms = this.parseRooms(this.props.course.Room || "");
-    const meetingTimesWithRooms = [];
-    for (let i = 0; i < meetingTimes.length; i++) {
-      let room = "";
-      if (rooms.length === 0) {
-        room = "";
-      } else if (rooms.length <= i) {
-        room = " - " + rooms[rooms.length - 1]
-      } else {
-        room = " - " + rooms[i];
-      }
-      meetingTimesWithRooms.push(<div key={i}>{meetingTimes[i] + room}</div>);
-    }
-    if (meetingTimesWithRooms.length === 0) {
-      meetingTimesWithRooms.push(<div key={0}>TBA</div>);
-    }
-    meetingTimesWithRooms.push(<br key={-1}/>);
-    return meetingTimesWithRooms;
   }
 
   getCourseDescriptionLink(courseDescTag) {
@@ -82,7 +27,7 @@ class CourseDetailModal extends React.Component {
     this.setState({ copiedCRN: true });
   }
 
-  onCloseModal() {
+  onToggleModal() {
     this.setState({ copiedCRN: false });
     this.props.toggle();
   }
@@ -93,7 +38,6 @@ class CourseDetailModal extends React.Component {
 
   render() {
     if (this.props.course) {
-      let meetingTimesWithRooms = this.findMeetingTimesWithRooms();
       let cccRequirements = "";
       if (this.props.course.CCCReq) {
         for (let i = 0; i < this.props.course.CCCReq.length; i++) {
@@ -106,14 +50,14 @@ class CourseDetailModal extends React.Component {
       const copyText = this.state.copiedCRN ? "Copied!" : "Copy CRN";
       return (
         <div>
-          <Modal isOpen={this.props.isOpen} toggle={this.onCloseModal}>
-            <ModalHeader toggle={this.onCloseModal}>{this.props.course.Course}</ModalHeader>
+          <Modal isOpen={this.props.isOpen} toggle={this.onToggleModal}>
+            <ModalHeader toggle={this.onToggleModal}>{this.props.course.Course}</ModalHeader>
             <ModalBody>
               <b>CRN:</b> {this.props.course.CRN}<br/>
               <b>Title:</b> {this.props.course.Title}<br/>
               <b>Instructor:</b> {this.props.course.Instructor}<br/><br/>
-              <b>Meeting Times:</b>
-              {meetingTimesWithRooms}
+              <b>Meeting Times:</b><br/>
+              {this.props.meetingTimesWithRooms}
               <b>Available Seats:</b> {this.props.course.SeatsAvail || 0}<br/>
               <b>Waitlist:</b> {this.props.course.WaitList || 0}<br/>
               <b>Reserved Seats:</b> {this.props.course.ResSeats || 0}<br/><br/>
@@ -128,7 +72,7 @@ class CourseDetailModal extends React.Component {
                 <CopyToClipboard text={this.props.course.CRN} onCopy={this.onCopyCRN}>
                   <Button color="primary">{copyText}</Button>
                 </CopyToClipboard>
-                <Button className="ml-2" color="secondary" onClick={this.onCloseModal}>Close</Button>
+                <Button className="ml-2" color="secondary" onClick={this.onToggleModal}>Close</Button>
               </div>
             </ModalFooter>
           </Modal>

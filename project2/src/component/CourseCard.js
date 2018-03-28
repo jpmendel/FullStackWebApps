@@ -90,7 +90,7 @@ class CourseCard extends React.Component {
   }
 
   onViewDetail() {
-    this.props.onViewDetail(this.props.course);
+    this.props.onViewDetail(this.props.course, this.findMeetingTimesWithRooms());
   }
 
   render() {

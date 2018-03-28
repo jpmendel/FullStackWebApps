@@ -12,6 +12,7 @@ class CourseList extends React.Component {
     this.state = {
       isModalOpen: false,
       selectedCourse: null,
+      selectedMeetingTimesWithRooms: "",
       lastCopiedCRN: "C00000"
     }
   }
@@ -55,10 +56,11 @@ class CourseList extends React.Component {
     return null;
   }
 
-  onToggleModal(course) {
+  onToggleModal(course, meetingTimesWithRooms) {
     this.setState({
       isModalOpen: !this.state.isModalOpen,
-      selectedCourse: course
+      selectedCourse: course,
+      selectedMeetingTimesWithRooms: meetingTimesWithRooms
     });
   }
 
@@ -67,18 +69,22 @@ class CourseList extends React.Component {
   }
 
   render() {
-    const courses = this.createCourseContent();
+    const courseContent = this.createCourseContent();
     return (
       <div className="pt-4">
-        <CourseDetailModal course={this.state.selectedCourse} isOpen={this.state.isModalOpen} toggle={this.onToggleModal}/>
         <ReactCSSTransitionGroup
           transitionName="course_list_fade"
           transitionEnter={true}
           transitionEnterTimeout={500}
           transitionLeave={false}
           transitionLeaveTimeout={500}>
-          {courses}
+          {courseContent}
         </ReactCSSTransitionGroup>
+        <CourseDetailModal
+          course={this.state.selectedCourse}
+          meetingTimesWithRooms={this.state.selectedMeetingTimesWithRooms}
+          isOpen={this.state.isModalOpen}
+          toggle={this.onToggleModal}/>
       </div>
     );
   }
