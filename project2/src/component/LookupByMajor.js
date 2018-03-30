@@ -42,6 +42,7 @@ class LookupByMajor extends BaseLookupMethod {
     }
   }
 
+  // Gets a list of course IDs for a certain major as defined in Constants.js.
   getCoursesForMajor(major) {
     let courseQueryList = [];
     let classYearQueryList = [];
@@ -52,6 +53,7 @@ class LookupByMajor extends BaseLookupMethod {
     }
     for (let courseList of classYearQueryList) {
       for (let course of major[courseList]) {
+        // Add course ID with L, P and R to also get lab, problem sess, etc.
         courseQueryList.push(this.getCourseByID(course));
         courseQueryList.push(this.getCourseByID(course + "L"));
         courseQueryList.push(this.getCourseByID(course + "P"));
@@ -61,6 +63,7 @@ class LookupByMajor extends BaseLookupMethod {
     return courseQueryList;
   }
 
+  // Loads the required courses for a certain major.
   loadRequiredCourses() {
     let courseQueryList = [];
     for (let major of Constants.MAJORS) {
@@ -68,6 +71,7 @@ class LookupByMajor extends BaseLookupMethod {
         courseQueryList = this.getCoursesForMajor(major.courses);
       }
     }
+    // Wait for all courses to be fetched then set result.
     Promise.all(courseQueryList)
       .then((results) => {
         let requiredCourses = [];
@@ -79,7 +83,6 @@ class LookupByMajor extends BaseLookupMethod {
   }
 
   render() {
-    const buttonColor = (this.state.major && this.state.classYear) ? "primary" : "secondary";
     const majors = Constants.MAJORS.map((major, i) => <option key={i}>{major.name}</option>);
     const classYears = Constants.CLASS_YEARS.map((classYear, i) => <option key={i}>{classYear}</option>);
     return (
@@ -99,7 +102,7 @@ class LookupByMajor extends BaseLookupMethod {
             onChange={this.onClassYearChange}>
             {classYears}
           </Input>
-          <Button className="ml-sm-3 mt-3 mt-sm-0" color={buttonColor} onClick={this.onMajorSubmit}>Find Courses</Button>
+          <Button className="ml-sm-3 mt-3 mt-sm-0" color="primary" onClick={this.onMajorSubmit}>Find Courses</Button>
         </Form>
         <CourseList courseData={this.state.courseData}/>
       </div>

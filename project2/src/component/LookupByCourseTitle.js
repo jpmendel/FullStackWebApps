@@ -19,13 +19,17 @@ class LookupByCourseTitle extends BaseLookupMethod {
     this.setState({ courseTitle: event.target.value });
   }
 
+  // Searches the input text for any course IDs (ex. CSCI 204).
   searchForCourseIDs(text) {
+    // Regular expression to match 4 letters 3 numbers and 1 optional letter.
     const regex = new RegExp("[a-zA-Z]{4}\\s?\\d{3}[a-zA-Z]?", "g");
+    // Find matched results in the entered string.
     const matchedResults = text.match(regex);
     if (matchedResults && matchedResults.length > 0 && matchedResults[0]) {
       let courseIDs = []
       for (let matchedString of matchedResults) {
         if (!courseIDs.includes(matchedString)) {
+          // Add the matched string with L, P, and R for lab, problem sess, etc.
           courseIDs.push(matchedString);
           courseIDs.push(matchedString + "L");
           courseIDs.push(matchedString + "P");
@@ -37,6 +41,7 @@ class LookupByCourseTitle extends BaseLookupMethod {
     return null;
   }
 
+  // Filters the results to get only courses that match all keywords.
   filterCourseTitleResults(results, keywords) {
     let filteredResults = [];
     for (let result of results) {
@@ -54,18 +59,22 @@ class LookupByCourseTitle extends BaseLookupMethod {
         this.setState({ lastSearch: this.state.courseTitle });
         const courseIDs = this.searchForCourseIDs(this.state.courseTitle);
         if (courseIDs !== null) {
+          // If we find course IDs, search by them.
           this.loadCoursesByID(courseIDs);
         } else {
+          // Else, just search for keywords.
           this.loadCoursesBySearching(this.state.courseTitle);
         }
       }
     } else {
+      // Nothing entered into the text box.
       if (this.state.courseData === null) {
         this.setState({ courseData: "invalid" });
       }
     }
   }
 
+  // Loads courses by their 4 letter 3 number ID.
   loadCoursesByID(courseIDs) {
     let courseQueryList = []
     for (let courseID of courseIDs) {
@@ -85,6 +94,7 @@ class LookupByCourseTitle extends BaseLookupMethod {
       });
   }
 
+  // Loads courses by searching for keywords.
   loadCoursesBySearching(keywords) {
     const query = `text=${keywords}`
     this.getCoursesByQuery(query)
@@ -99,6 +109,7 @@ class LookupByCourseTitle extends BaseLookupMethod {
   }
 
   render() {
+    // Gray out button if no text is entered in the text box.
     const buttonColor = this.state.courseTitle ? "primary" : "secondary";
     return (
       <div className="p-4">

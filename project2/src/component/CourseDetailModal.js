@@ -15,6 +15,7 @@ class CourseDetailModal extends React.Component {
     };
   }
 
+  // Gets the link to the course description web page from a retrieved tag.
   getCourseDescriptionLink(courseDescTag) {
     const href = courseDescTag.match("href=\".*\"");
     if (href.length > 0) {
@@ -33,6 +34,7 @@ class CourseDetailModal extends React.Component {
     this.props.toggle();
   }
 
+  // Opens the course description in a new tab in the browser.
   onOpenCourseDescription() {
     window.open(this.getCourseDescriptionLink(this.props.course.CrseDesc), "_blank");
   }

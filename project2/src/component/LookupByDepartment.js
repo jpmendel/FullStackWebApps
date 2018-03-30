@@ -35,6 +35,7 @@ class LookupByDepartment extends BaseLookupMethod {
     }
   }
 
+  // Load courses by searching for a 4 letter department code.
   loadCoursesBySearching(department) {
     let dept = "";
     let i = 0;
@@ -54,7 +55,6 @@ class LookupByDepartment extends BaseLookupMethod {
   }
 
   render() {
-    const buttonColor = this.state.department ? "primary" : "secondary";
     const departments = Constants.DEPARTMENTS.map((dept, i) => <option key={i}>{dept}</option>);
     return (
       <div className="p-4">
@@ -67,7 +67,7 @@ class LookupByDepartment extends BaseLookupMethod {
             {departments}
           </Input>
           <Button
-            className="ml-sm-3 mt-3 mt-sm-0" color={buttonColor}
+            className="ml-sm-3 mt-3 mt-sm-0" color="primary"
             onClick={this.onDepartmentSubmit}>
             Find Courses
           </Button>

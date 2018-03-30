@@ -25,6 +25,7 @@ class CourseCard extends React.Component {
     }
   }
 
+  // Returns a separated array of rooms from a single string of rooms.
   parseRooms() {
     let rooms = [];
     let room = "";
@@ -41,6 +42,7 @@ class CourseCard extends React.Component {
     return rooms;
   }
 
+  // Returns a separated array of meeting times from a single string of meeting times.
   parseMeetingTimes() {
     let meetingTimes = [];
     let meetingTime = "";
@@ -58,6 +60,7 @@ class CourseCard extends React.Component {
     return meetingTimes;
   }
 
+  // Creates a JSX object with meeting times matched to their specific rooms.
   findMeetingTimesWithRooms() {
     const meetingTimes = this.parseMeetingTimes();
     const rooms = this.parseRooms();

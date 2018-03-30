@@ -17,15 +17,18 @@ class CourseList extends React.Component {
     }
   }
 
+  // Creates JSX object of CourseCards based on the list of courses passed in.
   createCourseContent() {
     if (this.props.courseData !== null) {
       if (this.props.courseData === "invalid") {
+        // If no data, display invalid message.
         return (
           <Row key={"invalid"}>
             <div className="text-center mt-5 w-100" key="none">Please enter something to search.</div>
           </Row>
         );
       } else if (this.props.courseData === "none") {
+        // If no courses found, display none message.
         return (
           <Row key={"none"}>
             <div className="text-center mt-5 w-100" key="none">No courses found!</div>
@@ -36,7 +39,9 @@ class CourseList extends React.Component {
         let courseListKey = "";
         for (let i = 0; i < this.props.courseData.length; i++) {
           const course = this.props.courseData[i];
+          // Build a unique key for use with CSS transitions.
           courseListKey += course.Course;
+          // Add a column for each course being created.
           courseList.push(
             <Col className="my-3" xs={12} sm={6} md={4} xl={3} key={course.Course + " " + i}>
               <CourseCard

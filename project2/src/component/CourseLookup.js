@@ -43,6 +43,7 @@ class CourseLookup extends React.Component {
 
   render() {
     let lookupMethod = null;
+    // Selects the lookup method based on the tab that is currently active.
     if (this.state.lookupType === "0") {
       lookupMethod = <LookupByCourseTitle key={0}/>;
     } else if (this.state.lookupType === "1") {
@@ -53,6 +54,7 @@ class CourseLookup extends React.Component {
       lookupMethod = <LookupByMajor key={3}/>;
     }
     let scrollContainerClass = "";
+    // Shows the scroll to top button if the user has scrolled down enough.
     if (this.state.shouldShowScrollTopButton) {
       scrollContainerClass = "course_lookup-scroll_top_container course_lookup-scroll_top_container_fade_in";
     } else {

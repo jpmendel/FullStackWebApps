@@ -35,6 +35,7 @@ class LookupByRequirement extends BaseLookupMethod {
     }
   }
 
+  // Load courses by searching for a CCC requirement code.
   loadCoursesBySearching(requirement) {
     let cccReq = "";
     let i = 0;
@@ -54,7 +55,6 @@ class LookupByRequirement extends BaseLookupMethod {
   }
 
   render() {
-    const buttonColor = this.state.courseReq ? "primary" : "secondary";
     const requirements = Constants.REQUIREMENTS.map((req, i) => <option key={i}>{req}</option>);
     return (
       <div className="p-4">
@@ -67,7 +67,7 @@ class LookupByRequirement extends BaseLookupMethod {
             {requirements}
           </Input>
           <Button
-            className="ml-sm-3 mt-3 mt-sm-0" color={buttonColor}
+            className="ml-sm-3 mt-3 mt-sm-0" color="primary"
             onClick={this.onCourseReqSubmit}>
             Find Courses
           </Button>

@@ -2,11 +2,13 @@ import React from "react";
 import Constants from "../data/Constants.js";
 
 class BaseLookupMethod extends React.Component {
+  // Gets the upcoming semester to get courses for.
   getLookupSemester() {
     const date = new Date();
     return (date.getMonth() < 7) ? "Fall" : "Spring";
   }
 
+  // Gets the upcoming year to get courses for.
   getLookupYear() {
     const date = new Date();
     if (date.getMonth() < 7) {
@@ -16,6 +18,7 @@ class BaseLookupMethod extends React.Component {
     }
   }
 
+  // Get courses from the server using a specified query.
   getCoursesByQuery(query) {
     const semester = this.getLookupSemester();
     const year = this.getLookupYear();
@@ -23,6 +26,7 @@ class BaseLookupMethod extends React.Component {
       .then((response) => response.json());
   }
 
+  // Get courses from the server using a courseID (ex. CSCI 204).
   getCourseByID(courseID) {
     const semester = this.getLookupSemester();
     const year = this.getLookupYear();
