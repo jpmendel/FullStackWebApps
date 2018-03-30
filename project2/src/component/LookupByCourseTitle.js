@@ -27,6 +27,9 @@ class LookupByCourseTitle extends BaseLookupMethod {
       for (let matchedString of matchedResults) {
         if (!courseIDs.includes(matchedString)) {
           courseIDs.push(matchedString);
+          courseIDs.push(matchedString + "L");
+          courseIDs.push(matchedString + "P");
+          courseIDs.push(matchedString + "R");
         }
       }
       return courseIDs;

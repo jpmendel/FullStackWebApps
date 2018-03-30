@@ -44,24 +44,18 @@ class LookupByMajor extends BaseLookupMethod {
 
   getCoursesForMajor(major) {
     let courseQueryList = [];
-    if (this.state.classYear === "Any" || this.state.classYear === "First Year") {
-      for (let course of major.FIRST_YEAR_COURSES) {
-        courseQueryList.push(this.getCourseByID(course));
-      }
+    let classYearQueryList = [];
+    if (this.state.classYear === "Any") {
+      classYearQueryList = ["FIRST_YEAR_COURSES", "SOPHOMORE_COURSES", "JUNIOR_COURSES", "SENIOR_COURSES"];
+    } else {
+      classYearQueryList = [this.state.classYear.toUpperCase().replace(" ", "_") + "_COURSES"];
     }
-    if (this.state.classYear === "Any" || this.state.classYear === "Sophomore") {
-      for (let course of major.SOPHOMORE_COURSES) {
+    for (let courseList of classYearQueryList) {
+      for (let course of major[courseList]) {
         courseQueryList.push(this.getCourseByID(course));
-      }
-    }
-    if (this.state.classYear === "Any" || this.state.classYear === "Junior") {
-      for (let course of major.JUNIOR_COURSES) {
-        courseQueryList.push(this.getCourseByID(course));
-      }
-    }
-    if (this.state.classYear === "Any" || this.state.classYear === "Senior") {
-      for (let course of major.SENIOR_COURSES) {
-        courseQueryList.push(this.getCourseByID(course));
+        courseQueryList.push(this.getCourseByID(course + "L"));
+        courseQueryList.push(this.getCourseByID(course + "P"));
+        courseQueryList.push(this.getCourseByID(course + "R"));
       }
     }
     return courseQueryList;
