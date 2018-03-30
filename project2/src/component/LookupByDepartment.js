@@ -60,7 +60,7 @@ class LookupByDepartment extends BaseLookupMethod {
       <div className="p-4">
         <Form className="base_lookup-form" onSubmit={this.onDepartmentSubmit} inline>
           <Label for="dept_entry" className="text-center">
-            Enter a department:
+            Select a department:
           </Label>
           <Input id="dept_entry" className="ml-sm-3 mt-2 mt-sm-0" type="select"
             value={this.state.department} onChange={this.onDepartmentChange}>
